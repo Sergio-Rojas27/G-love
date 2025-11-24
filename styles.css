@@ -21,14 +21,20 @@ Body{
 }
 .Titulos{
     color: white;
-    font-size: 2rem;
+    font-size: 1.5rem;
+    font-family: 'LEMON-MILK-Regular';
+    margin: 0;
+}
+.Subtitulos{
+    color: white;
+    font-size: 0.875rem;
     font-family: 'LEMON-MILK-Regular';
     margin: 0;
 }
 
 @font-face {
     font-family: 'LEMON-MILK-Regular';
-    src: url("/media/LEMONMILK-Regular.ttf");
+    src: url("media/LEMONMILK-Regular.ttf");
 }
 
 .container-form{
@@ -96,4 +102,41 @@ button{
 
 .btn-siguiente {
     background: linear-gradient(to bottom, #00c090, #009570);
+}
+.head{
+    align-items: center;      
+    list-style: none;        
+    padding: 0;              
+    justify-content: center;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    margin-top: 8%;
+}
+.logo-head{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 40%;
+    margin-bottom: 5%;
+    height: 5rem;
+}
+.brillo-logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    height: 4.9rem;
+    width: 10.5rem;
+    filter: brightness(120%);
+    box-shadow: 0 0 1rem 0.005rem rgb(255, 255, 255);
+    border-radius: 40%;
+}
+.carrusel{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5%;
+    height: 15rem;
+    width: 25rem;
+    border-radius: 1rem;
 }
