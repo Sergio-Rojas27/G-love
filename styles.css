@@ -10,7 +10,7 @@ nav{
     margin-bottom: 5%;
     margin-top: 8%;
 }
-Body{
+Body, html{
     background: linear-gradient(180deg, #2D0085 0%, #25006D 35.98%, #170044 99.56%);
     width: 100%;
     height: 100%;
@@ -30,6 +30,11 @@ Body{
     font-size: 0.875rem;
     font-family: 'LEMON-MILK-Regular';
     margin: 0;
+}
+.texto-general{
+    color: white;
+    font-size: 1rem;
+    font-family: 'open-sans', sans-serif;
 }
 
 @font-face {
@@ -59,10 +64,6 @@ Body{
     margin-bottom: 0.5rem;
     font-size: 1rem;
     background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
-}
-
-.texto-general{
-    color: white;
 }
 
 .checkbox-container{
@@ -96,22 +97,35 @@ button{
     transform: scale(0.96);
 }
 
-.btn-atras {
+.buttons-container-center{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%; 
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.btn-azul {
     background: linear-gradient(to bottom, #6200ea, #30009c);
 }
 
-.btn-siguiente {
+.btn-verde {
     background: linear-gradient(to bottom, #00c090, #009570);
 }
+
 .head{
     align-items: center;      
     list-style: none;        
     padding: 0;              
     justify-content: center;
     margin-left: 10%;
+    margin-right: auto;
     margin-bottom: 5%;
-    margin-top: 8%;
+    margin-top: 6%;
 }
+
 .logo-head{
     display: block;
     margin-left: auto;
@@ -120,6 +134,7 @@ button{
     margin-bottom: 5%;
     height: 5rem;
 }
+
 .brillo-logo{
     display: block;
     margin-left: auto;
@@ -131,6 +146,7 @@ button{
     box-shadow: 0 0 1rem 0.005rem rgb(255, 255, 255);
     border-radius: 40%;
 }
+
 .carrusel{
     display: block;
     margin-left: auto;
@@ -139,4 +155,10 @@ button{
     height: 15rem;
     width: 25rem;
     border-radius: 1rem;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
