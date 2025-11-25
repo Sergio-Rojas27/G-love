@@ -39,8 +39,8 @@
             <label for="terminos">Política de privacidad</label>
         </section>
         <div class="buttons-container">
-            <a href="login.php"><button class="btn-atras">Atrás</button></a>
-            <button type="submit" class="btn-siguiente">Siguiente</button>
+            <a href="login.php"><button class="btn-azul">Atrás</button></a>
+            <button type="submit" class="btn-verde">Siguiente</button>
         </div>
     </form>
 </body>
