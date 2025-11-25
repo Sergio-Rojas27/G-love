@@ -8,12 +8,12 @@
 </head>
 <body>
      
-        <div class="head">
-            <div class="brillo-logo">
-                <img src="media/gameloversLogo 2.svg" alt="Aca va el loguito, mogul" class="logo-head">
-            </div>
-            <img src="media/Titulo.svg" alt="" class="titulo-head">
+    <div class="head">
+        <div class="brillo-logo">
+            <img src="media/gameloversLogo 2.svg" alt="Aca va el loguito, mogul" class="logo-head">
         </div>
+        <img src="media/Titulo.svg" alt="" class="titulo-head">
+    </div>
 
     <div class="carrusel">
         <div class="group">
