@@ -7,26 +7,50 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    
-    <nav style="display: flex; justify-content: center; align-items: center;">
+     
         <div class="head">
             <div class="brillo-logo">
                 <img src="media/gameloversLogo 2.svg" alt="Aca va el loguito, mogul" class="logo-head">
             </div>
-            <img src="media/Titulo.svg" alt="">
+            <img src="media/Titulo.svg" alt="" class="titulo-head">
         </div>
-    </nav>
 
     <div class="carrusel">
-        <section>
-            <div class="imagen-conoce"></div>
-            <div class="imagen-chatea"></div>
-            <div class="imagen-conecta"></div>
-        </section>
+        <div class="group">
+            <div>
+                <img src="media/conoce.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/chatea.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/conecta.svg" alt="" class="img-card">
+            </div>
+        </div>
+        <div aria-hidden class="group">
+            <div>
+                <img src="media/conoce.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/chatea.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/conecta.svg" alt="" class="img-card">
+            </div>
+        </div>
+            <!-- ESTE ESTÁ PORQUE SINO EN ESCRITORIO QUEDA ESPACIO ANTES DEL REINICIO -->
+        <div aria-hidden class="group">
+            <div>
+                <img src="media/conoce.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/chatea.svg" alt="" class="img-card">
+            </div>
+            <div>
+                <img src="media/conecta.svg" alt="" class="img-card">
+            </div>
+        </div>
     </div>
-    <script></script>
-    <script></script>
-    <script></script>
 
     <p class="Subtitulos" style="text-align: center;">¿List@ para ser <br>parte de game lovers?</p>
 

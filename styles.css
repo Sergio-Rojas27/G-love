@@ -115,18 +115,17 @@ button{
     background: linear-gradient(to bottom, #00c090, #009570);
 }
 
-.head{
+.head {
     align-items: center;      
     list-style: none;        
     padding: 0;              
     justify-content: center;
-    margin-left: 10%;
     margin-right: auto;
     margin-bottom: 5%;
     margin-top: 6%;
 }
 
-.logo-head{
+.logo-head {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -135,7 +134,13 @@ button{
     height: 5rem;
 }
 
-.brillo-logo{
+.titulo-head {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brillo-logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -147,7 +152,7 @@ button{
     border-radius: 40%;
 }
 
-.carrusel{
+.carrusel {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -157,8 +162,39 @@ button{
     border-radius: 1rem;
 }
 
-.centrar{
+.centrar {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.carrusel {
+    width: 90%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.carrusel::-webkit-scrollbar {
+    display: none;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    animation: spin 15s infinite linear;
+    padding-right: 1em;
+}
+
+.img-card {
+    width: 17.1875rem;
+    height: 11.75rem;
+    object-fit: cover;
+    border-radius: .2rem;
+}
+
+@keyframes spin {
+    from {translate: 0;}
+    to {translate: -100%;}
 }
