@@ -10,21 +10,25 @@ nav{
     margin-bottom: 5%;
     margin-top: 8%;
 }
+
 Body{
     background: linear-gradient(180deg, #2D0085 0%, #25006D 35.98%, #170044 99.56%);
     width: 100%;
     height: 100%;
 }
+
 .logo{
     height: 2.5rem;
     margin-right: 1rem;
 }
+
 .Titulos{
     color: white;
     font-size: 1.5rem;
     font-family: 'LEMON-MILK-Regular';
     margin: 0;
 }
+
 .Subtitulos{
     color: white;
     font-size: 0.875rem;
