@@ -1,7 +1,8 @@
 *{
     margin: 0;
 }
-nav{
+
+nav {
     display: flex;          
     list-style: none;        
     padding: 0;              
@@ -11,29 +12,35 @@ nav{
     margin-top: 8%;
 }
 
-Body{
+Body, html {
     background: linear-gradient(180deg, #2D0085 0%, #25006D 35.98%, #170044 99.56%);
     width: 100%;
     height: 100%;
 }
 
-.logo{
-    height: 2.5rem;
-    margin-right: 1rem;
+.logo {
+    height: 2.75rem;
+    width: 5.875rem;
 }
 
-.Titulos{
+.Titulos {
     color: white;
     font-size: 1.5rem;
     font-family: 'LEMON-MILK-Regular';
     margin: 0;
 }
 
-.Subtitulos{
+.Subtitulos {
     color: white;
     font-size: 0.875rem;
     font-family: 'LEMON-MILK-Regular';
     margin: 0;
+}
+
+.texto-general {
+    color: white;
+    font-size: 1rem;
+    font-family: 'open-sans', sans-serif;
 }
 
 @font-face {
@@ -65,10 +72,6 @@ Body{
     background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
 }
 
-.texto-general{
-    color: white;
-}
-
 .checkbox-container{
     margin-left: 10%;
     margin-top: 5%;
@@ -89,7 +92,7 @@ button{
     font-family: sans-serif;
     font-size: 16px;
     border: none;
-    border-radius: 20px;
+    border-radius: 14px;
     padding: 10px 35px;
     cursor: pointer;
     transition: transform 0.1s;
@@ -100,23 +103,43 @@ button{
     transform: scale(0.96);
 }
 
-.btn-atras {
+.buttons-container-center{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%; 
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.btn-azul {
     background: linear-gradient(to bottom, #6200ea, #30009c);
 }
 
-.btn-siguiente {
+.btn-verde {
     background: linear-gradient(to bottom, #00c090, #009570);
 }
-.head{
+
+.btn-facebook {
+    background: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
+}
+
+.btn-google {
+    background: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
+}
+
+.head {
     align-items: center;      
     list-style: none;        
     padding: 0;              
     justify-content: center;
-    margin-left: 10%;
+    margin-right: auto;
     margin-bottom: 5%;
-    margin-top: 8%;
+    margin-top: 6%;
 }
-.logo-head{
+
+.logo-head {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -124,7 +147,14 @@ button{
     margin-bottom: 5%;
     height: 5rem;
 }
-.brillo-logo{
+
+.titulo-head {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brillo-logo {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -135,7 +165,8 @@ button{
     box-shadow: 0 0 1rem 0.005rem rgb(255, 255, 255);
     border-radius: 40%;
 }
-.carrusel{
+
+.carrusel {
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -143,4 +174,96 @@ button{
     height: 15rem;
     width: 25rem;
     border-radius: 1rem;
+}
+
+.centrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carrusel {
+    width: 100%;
+    display: flex;
+    overflow-x: auto;
+}
+
+.carrusel::-webkit-scrollbar {
+    display: none;
+}
+
+.group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    animation: spin 15s infinite linear;
+    padding-right: 1em;
+}
+
+.img-card {
+    width: 17.1875rem;
+    height: 11.75rem;
+    object-fit: cover;
+    border-radius: .2rem;
+}
+
+@keyframes spin {
+    from {translate: 0;}
+    to {translate: -100%;}
+}
+
+.navbar {
+    display: flex;          
+    list-style: none;        
+    padding: 0;              
+    justify-content: left;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    background: linear-gradient(to bottom, #5D00E8, #2D0084);
+    box-shadow: 0 0 1rem 0.5rem #1f005d;
+}
+
+
+.brillo-logo-navbar {
+    display: block;
+    margin-left: 2.2rem;
+    margin-right: 1.5rem;
+    height: 2.75rem;
+    width: 5.875rem;
+    filter: brightness(120%);
+    box-shadow: 0 0 1rem 0.005rem rgb(255, 255, 255);
+    border-radius: 40%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+
+}
+
+.bx {
+    font-size: 1.875rem;
+    transform: translateX(-35px);
+    cursor: pointer;
+}
+
+.container-form-login{
+    align-items: center;
+    text-align: center;
+    display: flex;           
+    flex-direction: column;  
+    height: 40%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: #27134e; 
+    border-radius: 1rem;  
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
