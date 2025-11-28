@@ -1,0 +1,17 @@
+/* COLORES Y GRADIENTES */
+
+.gradiente-morado {
+    background: linear-gradient(to bottom, #6200ea, #30009c);
+}
+
+.gradiente-verde {
+    background: linear-gradient(to bottom, #00c090, #009570);
+}
+
+.gradiente-azul{
+    background: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
+}
+
+.gradiente-blanco{
+    background: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
+}

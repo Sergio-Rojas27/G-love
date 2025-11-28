@@ -1,0 +1,26 @@
+/* TEXTOS Y TIPOGRAFIAS*/
+
+@font-face {
+    font-family: 'LEMON-MILK-Regular';
+    src: url("../media/LEMONMILK-Regular.ttf");
+}
+
+.Titulos {
+    color: white;
+    font-size: 1.5rem;
+    font-family: 'LEMON-MILK-Regular';
+    margin: 0;
+}
+
+.Subtitulos {
+    color: white;
+    font-size: 0.875rem;
+    font-family: 'LEMON-MILK-Regular';
+    margin: 0;
+}
+
+.texto-general {
+    color: white;
+    font-size: 1rem;
+    font-family: 'open-sans', sans-serif;
+}

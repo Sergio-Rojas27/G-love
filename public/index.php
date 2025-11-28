@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenida</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-     
+    
+    <!-- muchachos por si las moscas TODAS las solicitudes que se le hagan a la pagina deben pasar por un controllador index y de ahi se redireccionan, por seguridad -->
+
     <div class="head">
         <div class="brillo-logo">
             <img src="media/gameloversLogo 2.svg" alt="Aca va el loguito, mogul" class="logo-head">
@@ -55,13 +57,13 @@
     <p class="Subtitulos" style="text-align: center;">¿List@ para ser <br>parte de game lovers?</p>
 
     <div class="buttons-container-center" style="margin-top: 7%;">
-        <a href="register.php"><button class="btn-verde">Registrarse</button></a>
+        <a href="../app/views/register.php"><button class="gradiente-verde">Registrarse</button></a>
     </div>
 
     <p class="texto-general" style="text-align: center; margin-top: 25%;">¿Ya tienes una cuenta?</p>
 
     <div class="buttons-container-center">
-        <a href="login.php"><button class="btn-azul">Iniciar sesión</button></a>
+        <a href="../app/views/login.php"><button class="gradiente-morado">Iniciar sesión</button></a>
     </div>
 </body>
 </html>

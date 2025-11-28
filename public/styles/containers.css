@@ -1,0 +1,64 @@
+/* CONTENEDORES */
+
+.container-form-login{
+    align-items: center;
+    text-align: center;
+    display: flex;           
+    flex-direction: column;  
+    height: 40%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: #27134e; 
+    border-radius: 1rem;  
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+}
+
+.buttons-container-center{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%; 
+
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+.checkbox-container{
+    margin-left: 10%;
+    margin-top: 5%;
+}
+
+.buttons-container{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%; 
+
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.container-form{
+    align-items: center;
+    text-align: center;
+    display: flex;           
+    flex-direction: column;  
+    height: 100%;
+    margin-right: 10%;
+    margin-left: 10%;
+    background-color: #27134e; 
+    border-radius: 1rem;  
+    padding-top: 5%;
+    padding-bottom: 5%;
+}

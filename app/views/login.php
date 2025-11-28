@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesion</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../public/styles/styles.css">
 </head>
 <body>
      
     <div class="navbar">
         <div class="brillo-logo-navbar">
-            <img src="media/gameloversLogo.svg" alt="Aca va el loguito, mogul" class="logo">
+            <img src="../../public/media/gameloversLogo.svg" alt="Aca va el loguito, mogul" class="logo">
         </div>
         <p class="Titulos" style="display: block;">Inicio de Sesion</p>
     </div>
@@ -25,23 +25,23 @@
             <i class='bx bx-show-alt'></i>
         </div>
         <div class="buttons-container-center" style="margin-top: 2rem; gap: 1rem;">
-            <a href="login.php"><button class="btn-google">
-                <img src="media/google.svg" alt="" style="width: 5rem; height: 2rem;">
+            <a href="login.php"><button class="gradiente-blanco">
+                <img src="../../public/media/google.svg" alt="" style="width: 5rem; height: 2rem;">
             </button></a>
-            <a href="login.php"><button class="btn-facebook">
-                <img src="media/facebook.svg" alt="" style="width: 6rem; height: 2rem;">
+            <a href="login.php"><button class="gradiente-azul">
+                <img src="../../public/media/facebook.svg" alt="" style="width: 6rem; height: 2rem;">
             </button></a>
         </div>
 
         <div class="buttons-container-center" style="margin-top: 7%;">
-            <a href="index.php"><button class="btn-verde">Siguiente</button></a>
+            <a href=""><button class="gradiente-verde">Siguiente</button></a>
         </div>
         
         <p class="texto-general" style="text-align: center; margin-top: 4rem; margin-bottom: 0%;">¿Olvidaste tu contraseña?</p>
     </div>
 
     <div class="buttons-container" style="margin-top: 10rem;">
-        <a href="login.php"><button class="btn-azul">Atras</button></a>
+        <a href="../../public/index.php"><button class="gradiente-morado">Atras</button></a>
     </div>
 
     <script src="script.js"></script>

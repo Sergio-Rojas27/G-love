@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../../public/styles/styles.css">
 </head>
 <body>
     <nav>
-        <img src="media/gameloversLogo.svg" alt="Aca va el loguito, mogul" class="logo">
+        <img src="../../public/media/gameloversLogo.svg" alt="Aca va el loguito, mogul" class="logo">
         <h2 class="Titulos">REGISTRO</h2>
     </nav>
     <form action="">
@@ -39,8 +39,8 @@
             <label for="terminos">Política de privacidad</label>
         </section>
         <div class="buttons-container">
-            <a href="login.php"><button class="btn-azul">Atrás</button></a>
-            <button type="submit" class="btn-verde">Siguiente</button>
+            <a href="../../public/index.php"><button class="gradiente-morado">Atrás</button></a>
+            <button type="submit" class="gradiente-verde">Siguiente</button>
         </div>
     </form>
 </body>

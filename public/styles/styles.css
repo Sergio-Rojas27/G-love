@@ -1,3 +1,10 @@
+@import url(components.css);
+@import url(colors.css);
+@import url(text.css);
+@import url(containers.css);
+
+/* Honestamente no supe en  que categoria meter estos estilos xd */
+
 *{
     margin: 0;
 }
@@ -21,112 +28,6 @@ Body, html {
 .logo {
     height: 2.75rem;
     width: 5.875rem;
-}
-
-.Titulos {
-    color: white;
-    font-size: 1.5rem;
-    font-family: 'LEMON-MILK-Regular';
-    margin: 0;
-}
-
-.Subtitulos {
-    color: white;
-    font-size: 0.875rem;
-    font-family: 'LEMON-MILK-Regular';
-    margin: 0;
-}
-
-.texto-general {
-    color: white;
-    font-size: 1rem;
-    font-family: 'open-sans', sans-serif;
-}
-
-@font-face {
-    font-family: 'LEMON-MILK-Regular';
-    src: url("media/LEMONMILK-Regular.ttf");
-}
-
-.container-form{
-    align-items: center;
-    text-align: center;
-    display: flex;           
-    flex-direction: column;  
-    height: 100%;
-    margin-right: 10%;
-    margin-left: 10%;
-    background-color: #27134e; 
-    border-radius: 1rem;  
-    padding-top: 5%;
-    padding-bottom: 5%;
-}
-
-.form-input{
-    width: 80%;
-    border-radius: 1rem;
-    height: 2.5rem;
-    margin-top: 2%;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
-}
-
-.checkbox-container{
-    margin-left: 10%;
-    margin-top: 5%;
-}
-
-.buttons-container{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%; 
-
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-button{
-    color: white;
-    font-family: sans-serif;
-    font-size: 16px;
-    border: none;
-    border-radius: 14px;
-    padding: 10px 35px;
-    cursor: pointer;
-    transition: transform 0.1s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-.btn:active {
-    transform: scale(0.96);
-}
-
-.buttons-container-center{
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-top: 5%; 
-
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-}
-
-.btn-azul {
-    background: linear-gradient(to bottom, #6200ea, #30009c);
-}
-
-.btn-verde {
-    background: linear-gradient(to bottom, #00c090, #009570);
-}
-
-.btn-facebook {
-    background: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
-}
-
-.btn-google {
-    background: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
 }
 
 .head {
@@ -237,33 +138,9 @@ button{
     border-radius: 40%;
 }
 
-.container {
-    display: flex;
-    align-items: center;
-    height: 2.5rem;
-    width: 100%;
-    margin-top: 2%;
-    margin-bottom: 0.5rem;
-    margin-left: 2rem;
-
-}
 
 .bx {
     font-size: 1.875rem;
     transform: translateX(-35px);
     cursor: pointer;
-}
-
-.container-form-login{
-    align-items: center;
-    text-align: center;
-    display: flex;           
-    flex-direction: column;  
-    height: 40%;
-    margin-right: 10%;
-    margin-left: 10%;
-    background-color: #27134e; 
-    border-radius: 1rem;  
-    padding-top: 5%;
-    padding-bottom: 5%;
 }
