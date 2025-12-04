@@ -1,69 +1,54 @@
+<?php
+// LOGICA DE ENRUTADO, todas las solicitudes pasan por aqui
+// disclaimer: si podemos usar etiquestas <a> pero no pasandole un archivo sino una url con un GET validado (ej: ?login)
+$ruta = __DIR__;
+$titulo = 'Game Lovers';
+$pagina_solicitada = 'home'; // default a la pagina de titulo
+$dir_vistas = '../app/views/';
+$vista;
+
+// todos los GET llegan aqui para escoger que pagina renderizar
+if ($_SERVER['REQUEST_METHOD'] === 'GET') 
+{
+    // ejempllo: si href nos manda a "?to_home" se muestra el archivo home.php
+    if (isset($_GET['home']))
+    {
+        $pagina_solicitada = 'home';
+    }
+    if (isset($_GET['register']))
+    {
+        $pagina_solicitada = 'register';
+    }
+    if (isset($_GET['login']))
+    {
+        $pagina_solicitada = 'login';
+    }
+    
+    $vista = $dir_vistas . $pagina_solicitada . '.php';
+}
+
+// todas las solicitudes donde se sube un form o un dato pasan por aqui y se usar header() para redireccionar al get apropiado
+if ($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+    $url_destino = '?home';
+
+    if (isset($_POST['home']))
+    {
+        header("Location: " . $url_destino , true, 303); // redirect por get
+        exit;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenida</title>
+    <title><?php echo htmlspecialchars($titulo) ?></title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    
-    <!-- muchachos por si las moscas TODAS las solicitudes que se le hagan a la pagina deben pasar por un controllador index y de ahi se redireccionan, por seguridad -->
-
-    <div class="head">
-        <div class="brillo-logo">
-            <img src="media/gameloversLogo 2.svg" alt="Aca va el loguito, mogul" class="logo-head">
-        </div>
-        <img src="media/Titulo.svg" alt="" class="titulo-head">
-    </div>
-
-    <div class="carrusel">
-        <div class="group">
-            <div>
-                <img src="media/conoce.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/chatea.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/conecta.svg" alt="" class="img-card">
-            </div>
-        </div>
-        <div aria-hidden class="group">
-            <div>
-                <img src="media/conoce.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/chatea.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/conecta.svg" alt="" class="img-card">
-            </div>
-        </div>
-            <!-- ESTE ESTÁ PORQUE SINO EN ESCRITORIO QUEDA ESPACIO ANTES DEL REINICIO -->
-        <div aria-hidden class="group">
-            <div>
-                <img src="media/conoce.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/chatea.svg" alt="" class="img-card">
-            </div>
-            <div>
-                <img src="media/conecta.svg" alt="" class="img-card">
-            </div>
-        </div>
-    </div>
-
-    <p class="Subtitulos" style="text-align: center;">¿List@ para ser <br>parte de game lovers?</p>
-
-    <div class="buttons-container-center" style="margin-top: 7%;">
-        <a href="../app/views/register.php"><button class="gradiente-verde">Registrarse</button></a>
-    </div>
-
-    <p class="texto-general" style="text-align: center; margin-top: 25%;">¿Ya tienes una cuenta?</p>
-
-    <div class="buttons-container-center">
-        <a href="../app/views/login.php"><button class="gradiente-morado">Iniciar sesión</button></a>
-    </div>
+    <?php include_once $vista ?>
 </body>
 </html>
