@@ -1,5 +1,7 @@
 <?php
 
+
+session_start();
 //
 // -------- CONFIGURACION DE AUTH0 PARA LOGIN --------
 //
@@ -26,9 +28,9 @@ use Steampixel\Route;
 
 // Define route constants:
 define('ROUTE_URL_INDEX', rtrim($_ENV['AUTH0_BASE_URL'], '/'));
-define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login'); 
+define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '?login'); 
 define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback'); // a donde van DESPUES de loguearse
-define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout'); // a donde van al desloguearse
+define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '?home'); // a donde van al desloguearse
 
 Route::add('/', function() use ($auth0) {
   $session = $auth0->getCredentials();
