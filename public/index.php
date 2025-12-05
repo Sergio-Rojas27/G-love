@@ -1,6 +1,4 @@
 <?php
-
-
 session_start();
 //
 // -------- CONFIGURACION DE AUTH0 PARA LOGIN --------
@@ -48,6 +46,19 @@ Route::add('/', function() use ($auth0) {
 
   echo '<p>You can now <a href="?home">log out</a>.</p>';
 });
+
+Route::add('/login', function() use ($auth0) {
+    // It's a good idea to reset user sessions each time they go to login to avoid "invalid state" errors, should they hit network issues or other problems that interrupt a previous login process:
+    $auth0->clear();
+
+    // Finally, set up the local application session, and redirect the user to the Auth0 Universal Login Page to authenticate.
+    header("Location: " . $auth0->login(ROUTE_URL_CALLBACK));
+    exit;
+});
+
+//
+// Fin del codigo de librerias por el momento
+//
 
 $ruta = __DIR__;
 $titulo = 'Game Lovers';
