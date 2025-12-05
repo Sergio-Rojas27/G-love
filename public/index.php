@@ -4,10 +4,10 @@
 // -------- CONFIGURACION DE AUTH0 PARA LOGIN --------
 //
 // Import the Composer Autoloader to make the SDK classes accessible:
-require 'vendor/autoload.php';
+require '../app/vendor/autoload.php';
 
 // Load our environment variables from the .env file:
-(Dotenv\Dotenv::createImmutable(__DIR__))->load();
+(Dotenv\Dotenv::createImmutable(__DIR__ . '/../'))->load();
 
 // Now instantiate the Auth0 class with our configuration
 $auth0 = new \Auth0\SDK\Auth0([
@@ -26,9 +26,26 @@ use Steampixel\Route;
 
 // Define route constants:
 define('ROUTE_URL_INDEX', rtrim($_ENV['AUTH0_BASE_URL'], '/'));
-define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login');
-define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback');
-define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout');
+define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '/login'); 
+define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback'); // a donde van DESPUES de loguearse
+define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '/logout'); // a donde van al desloguearse
+
+Route::add('/', function() use ($auth0) {
+  $session = $auth0->getCredentials();
+
+  if ($session === null) {
+    // The user isn't logged in.
+    echo '<p>Please <a href="?login">log in</a>.</p>';
+    return;
+  }
+
+  // The user is logged in.
+  echo '<pre>';
+  print_r($session->user);
+  echo '</pre>';
+
+  echo '<p>You can now <a href="?home">log out</a>.</p>';
+});
 
 $ruta = __DIR__;
 $titulo = 'Game Lovers';
