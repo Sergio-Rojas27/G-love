@@ -9,7 +9,7 @@
         <input required type="text" id="Usuario" name="Usuario" class="form-input" placeholder="Usuario" style="color: white; padding-left: 1rem;">
         <div class="container" style="justify-content: center; align-items: center;">
             <input required type="password" id="password" name="password" class="form-input" placeholder="Contraseña" style="color: white; padding-left: 1rem;">
-            <i class='bx bx-show-alt'></i>
+            <i class='bx'><img id="ojo" src="media/ojoA.png" alt=""></i>
         </div>
         <div class="buttons-container-center" style="margin-top: 2rem; gap: 1rem;">
             <a href="login.php"><button class="gradiente-blanco">
