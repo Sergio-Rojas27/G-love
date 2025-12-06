@@ -6,7 +6,7 @@
 
 <div class="container-form-login" style="margin-top: 1.5rem;">
     <form method="POST" action="">
-        <input required type="text" id="Usuario" name="Usuario" class="form-input" placeholder="Usuario" style="color: white; padding-left: 1rem;">
+        <input required type="text" id="Usuario" name="user" class="form-input" placeholder="Usuario" style="color: white; padding-left: 1rem;">
         <div class="container" style="justify-content: center; align-items: center;">
             <input required type="password" id="password" name="password" class="form-input" placeholder="Contraseña" style="color: white; padding-left: 1rem;">
             <i class='bx bx-show-alt'></i>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="buttons-container-center" style="margin-top: 7%;">
-            <a href=""><button class="gradiente-verde">Siguiente</button></a>
+            <button class="gradiente-verde" name="enter_login">Ingresar</button>
         </div>
         
         <p class="texto-general" style="text-align: center; margin-top: 4rem; margin-bottom: 0%;">¿Olvidaste tu contraseña?</p>
