@@ -85,3 +85,15 @@ input[type="file"] {
 .upload-button-styled {
     display: none;
 }
+
+.img-perfil{
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 1rem;
+}
+
+.img-general{
+    width: 5.625rem;
+    height: 5.625rem;
+    border-radius: 1rem;
+}

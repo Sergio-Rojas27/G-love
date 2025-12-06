@@ -21,6 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'register2';
     }
+    if (isset($_GET['register3']))
+    {
+        $pagina_solicitada = 'register3';
+    }
+    if (isset($_GET['register4']))
+    {
+        $pagina_solicitada = 'register4';
+    }
     if (isset($_GET['login']))
     {
         $pagina_solicitada = 'login';

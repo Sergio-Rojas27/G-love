@@ -2,7 +2,7 @@
     $titulo_header = 'Registro';
     require_once __DIR__ . '../../templates/header.php';
 ?>
-<form action="" method="POST">
+<form action="" method="POST" class="form-todo">
 <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Cuéntanos que te interesa</p>
 
 <div class="container-form">
@@ -104,7 +104,7 @@
     <div class="buttons-container">
         <a href="?home"><button class="gradiente-morado">Atrás</button></a>
 
-        <button type="submit" class="gradiente-verde">Siguiente</button>
+        <a href="?register3"><button type="submit" class="gradiente-verde">Siguiente</button></a>
     </div> 
 </div> 
 </form>

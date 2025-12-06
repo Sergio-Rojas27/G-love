@@ -2,7 +2,7 @@
     $titulo_header = 'Registro';
     require_once __DIR__ . '../../templates/header.php';
 ?>
-<form action="" method="POST">
+<form action="" method="POST"  class="form-todo">
 <div class="container-form">
         <input required type="text" id="nombre" name="nombre" class="form-input" placeholder="Nombre">
         <input required type="text" id="apellido" name="apellido" class="form-input" placeholder="Apellido">
