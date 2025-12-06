@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 //
 // -------- CONFIGURACION DE AUTH0 PARA LOGIN --------
@@ -60,6 +61,8 @@ Route::add('/login', function() use ($auth0) {
 // Fin del codigo de librerias por el momento
 //
 
+=======
+>>>>>>> 487905cabe95c2d1a4e1fb67fc1c6e5931d19190
 $ruta = __DIR__;
 $titulo = 'Game Lovers';
 $pagina_solicitada = 'home'; // default a la pagina de titulo
@@ -91,11 +94,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
     $url_destino = '?home';
 
-    if (isset($_POST['home']))
+    if (isset($_POST['enter_login']))
     {
-        header("Location: " . $url_destino , true, 303); // redirect por get
-        exit;
+        $url_destino = '?home'; // temporalmente mientras esta listo el incio
+        $usuario = htmlspecialchars($_POST['user']) ?? null;
+        $contrasena = htmlspecialchars($_POST['password']) ?? null;
+        $ingreso_valido = false;
+        // logica para corrocoquear base de datos
+        // if credenciales coinciden destino='?feed' y usuarios en session[]
+
     }
+    
+    header("Location: " . $url_destino , true, 303); // redirect por get
+    exit;
 }
 ?>
 
