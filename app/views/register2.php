@@ -3,6 +3,8 @@
     require_once __DIR__ . '../../templates/header.php';
 ?>
 <form action="" method="POST">
+<p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Cuéntanos que te interesa</p>
+
 <div class="container-form">
         <input required type="text" id="nombre" name="nombre" class="form-input" placeholder="Nombre">
         <input required type="text" id="apellido" name="apellido" class="form-input" placeholder="Apellido">
@@ -51,7 +53,7 @@
     <div class="buttons-container">
         <a href="?home"><button class="gradiente-morado">Atrás</button></a>
 
-        <a href="?register2"><button class="gradiente-verde">Siguiente</button></a>
+        <button type="submit" class="gradiente-verde">Siguiente</button>
     </div> 
 </div> 
 </form>
