@@ -144,3 +144,13 @@ Body, html {
     transform: translateX(-35px);
     cursor: pointer;
 }
+
+.bx1 {
+    font-size: 1.875rem;
+    transform: translateX(-35px);
+    cursor: pointer;
+}
+
+.file-name {
+    color: #ffffff7e;
+}

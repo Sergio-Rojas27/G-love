@@ -12,6 +12,9 @@
     border-radius: 1rem;  
     padding-top: 5%;
     padding-bottom: 5%;
+
+    box-shadow: 
+        inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
 }
 
 .container {
@@ -22,6 +25,16 @@
     margin-top: 2%;
     margin-bottom: 0.5rem;
     margin-left: 1rem;
+}
+
+.register-container{
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    margin-left: 14%;
 }
 
 .buttons-container-center{
@@ -50,6 +63,7 @@
 }
 
 .container-form{
+    margin-top: 1.5rem;
     align-items: center;
     text-align: center;
     display: flex;           
@@ -61,4 +75,36 @@
     border-radius: 1rem;  
     padding-top: 5%;
     padding-bottom: 5%;
+
+    box-shadow: 
+        inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
+}
+
+input[type="date"] {
+    /* 1. Dimensiones y Espaciado */
+    width: 10rem;
+    padding: 8px 10px;
+
+    /* 2. Diseño del Borde y Fondo */
+    border-radius: 14px; /* Bordes redondeados */
+    background-image: linear-gradient(#5D00E8, #2D0084);
+
+    /* 3. Tipografía */
+    font-size: 16px;
+    color: #ffffff7e;
+}
+
+input[type="checkbox"] {
+    /* 1. Dimensiones y Espaciado */
+    width: 1.6rem;
+    height: 1.6rem;
+    margin-right: 2rem;
+
+    /* 2. Diseño del Borde y Fondo */
+    border-radius: 14px; /* Bordes redondeados */
+    background-image: linear-gradient(#5D00E8, #2D0084);
+
+    /* 3. Tipografía */
+    font-size: 16px;
+    color: #ffffff7e;
 }
