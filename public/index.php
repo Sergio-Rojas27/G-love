@@ -6,6 +6,21 @@ session_start();
 // Import the Composer Autoloader to make the SDK classes accessible:
 require '../app/vendor/autoload.php';
 
+// Pusher PHP Library
+  $options = array(
+    'cluster' => 'us2',
+    'useTLS' => true
+  );
+  $pusher = new Pusher\Pusher(
+    '2d731656151a9ba1db3e',
+    '849891e4606766bdca5b',
+    '2086922',
+    $options
+  );
+
+  $data['message'] = 'hello world';
+  $pusher->trigger('my-channel', 'my-event', $data);
+
 // Load our environment variables from the .env file:
 (Dotenv\Dotenv::createImmutable(__DIR__ . '/../'))->load();
 
@@ -106,6 +121,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($titulo) ?></title>
     <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
+    <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('2d731656151a9ba1db3e', {
+      cluster: 'us2'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      alert(JSON.stringify(data));
+    });
+  </script>
 </head>
 <body>
     <?php include_once $vista ?>
