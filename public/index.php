@@ -1,83 +1,4 @@
 <?php
-<<<<<<< HEAD
-session_start();
-//
-// -------- CONFIGURACION DE AUTH0 PARA LOGIN --------
-//
-// Import the Composer Autoloader to make the SDK classes accessible:
-require '../app/vendor/autoload.php';
-
-// Pusher PHP Library
-  $options = array(
-    'cluster' => 'us2',
-    'useTLS' => true
-  );
-  $pusher = new Pusher\Pusher(
-    '2d731656151a9ba1db3e',
-    '849891e4606766bdca5b',
-    '2086922',
-    $options
-  );
-
-  $data['message'] = 'hello world';
-  $pusher->trigger('my-channel', 'my-event', $data);
-
-// Load our environment variables from the .env file:
-(Dotenv\Dotenv::createImmutable(__DIR__ . '/../'))->load();
-
-// Now instantiate the Auth0 class with our configuration
-$auth0 = new \Auth0\SDK\Auth0([
-    'domain' => $_ENV['AUTH0_DOMAIN'],
-    'clientId' => $_ENV['AUTH0_CLIENT_ID'],
-    'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
-    'cookieSecret' => $_ENV['AUTH0_COOKIE_SECRET']
-]);
-
-//
-// -------- LOGICA DE ENRUTADO, todas las solicitudes pasan por aqui ---------
-//
-
-// (libreria simpleroute) Import our router library:
-use Steampixel\Route;
-
-// Define route constants:
-define('ROUTE_URL_INDEX', rtrim($_ENV['AUTH0_BASE_URL'], '/'));
-define('ROUTE_URL_LOGIN', ROUTE_URL_INDEX . '?login'); 
-define('ROUTE_URL_CALLBACK', ROUTE_URL_INDEX . '/callback'); // a donde van DESPUES de loguearse
-define('ROUTE_URL_LOGOUT', ROUTE_URL_INDEX . '?home'); // a donde van al desloguearse
-
-Route::add('/', function() use ($auth0) {
-  $session = $auth0->getCredentials();
-
-  if ($session === null) {
-    // The user isn't logged in.
-    echo '<p>Please <a href="?login">log in</a>.</p>';
-    return;
-  }
-
-  // The user is logged in.
-  echo '<pre>';
-  print_r($session->user);
-  echo '</pre>';
-
-  echo '<p>You can now <a href="?home">log out</a>.</p>';
-});
-
-Route::add('/login', function() use ($auth0) {
-    // It's a good idea to reset user sessions each time they go to login to avoid "invalid state" errors, should they hit network issues or other problems that interrupt a previous login process:
-    $auth0->clear();
-
-    // Finally, set up the local application session, and redirect the user to the Auth0 Universal Login Page to authenticate.
-    header("Location: " . $auth0->login(ROUTE_URL_CALLBACK));
-    exit;
-});
-
-//
-// Fin del codigo de librerias por el momento
-//
-
-=======
->>>>>>> main
 $ruta = __DIR__;
 $titulo = 'Game Lovers';
 $pagina_solicitada = 'home'; // default a la pagina de titulo
@@ -102,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
+    $vista = $dir_vistas . 'chats' . '.php';
 }
 
 // todas las solicitudes donde se sube un form o un dato pasan por aqui y se usar header() para redireccionar al get apropiado
@@ -132,21 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($titulo) ?></title>
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="https://js.pusher.com/8.4.0/pusher.min.js"></script>
-    <script>
-
-    // Enable pusher logging - don't include this in production
-    Pusher.logToConsole = true;
-
-    var pusher = new Pusher('2d731656151a9ba1db3e', {
-      cluster: 'us2'
-    });
-
-    var channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      alert(JSON.stringify(data));
-    });
-  </script>
 </head>
 <body>
     <?php include_once $vista ?>

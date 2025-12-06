@@ -1,0 +1,60 @@
+.chats-list-container{
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.notification-card {
+    background: linear-gradient(90deg, #6c528f 0%, #3e206a 100%);
+    width: 80%;
+    padding: 5%;
+    border-radius: 1rem; /* Bordes muy redondeados */
+    display: flex; /* Alinea la imagen y el texto lado a lado */
+    align-items: center; /* Centra verticalmente */
+    gap: 5%; /* Espacio entre la foto y el texto */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    position: relative; /* Necesario si usamos posición absoluta para la hora */
+}
+
+/* --- La Imagen de Perfil --- */
+.avatar {
+    height: 4rem;
+    aspect-ratio: 1/1;
+    width: auto;
+    border-radius: 0.5rem; /* Bordes redondeados pero no circular completo */
+    object-fit: cover; /* Asegura que la foto no se estire */
+    border: 2px solid rgba(255,255,255,0.1); /* Un borde sutil opcional */
+    flex-shrink: 0; /* Evita que la imagen se encoja */
+}
+
+/* --- El Contenedor de Texto --- */
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+/* --- Nombre de Usuario --- */
+.username {
+    font-size: 1.25rem;
+    font-weight: 700; /* Bold */
+    margin-bottom: 3%;
+}
+
+/* --- El Mensaje --- */
+.message {
+    font-size: 1rem;
+    font-weight: 100; /* Normal */
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* --- La Hora --- */
+.timestamp {
+    font-size: 0.75rem;
+    margin-top: 2%;
+    align-self: flex-end; /* Empuja la hora a la derecha */
+    opacity: 0.9; /* Un poco más transparente que el texto */
+}

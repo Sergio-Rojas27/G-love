@@ -57,6 +57,40 @@ class MessagesController {
         
         return $messages;
     }
+    public function getChats($userId) {
+        require 'db_conexion.php';
+        $chats = [];
+
+        $stmt = $mysqli->prepare("CALL ObtenerChatsRecientes(?)");
+        if (!$stmt) {
+            return $chats;
+        }
+
+        $stmt->bind_param("i", $userId);
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            if ($result) {
+                while ($row = $result->fetch_assoc()) {
+                    $chats[] = $row;
+                }
+                $result->free();
+            } else {
+                // Manejar error en la obtención de resultados
+                return $chats;
+            }
+        }
+        $stmt->close();
+
+        // Consumir posibles resultados adicionales del procedimiento almacenado
+        while ($mysqli->more_results() && $mysqli->next_result()) {
+            $extra = $mysqli->use_result();
+            if ($extra) {
+                $extra->free();
+            }
+        }
+        
+        return $chats;
+    }
 }
 
 
