@@ -6,7 +6,6 @@ class MessagesController {
     
     // Función para enviar un mensaje
     public function sendMessage($fromUserId, $toUserId, $messageContent) {
-        // Aquí iría la lógica para guardar el mensaje en la base de datos
         global $mysqli;
         $stmt = $mysqli->prepare("INSERT INTO messages (id_user_from, id_user_to, message) VALUES (?, ?, ?)");
         if (!$stmt) {
@@ -25,13 +24,11 @@ class MessagesController {
     
     // Función para obtener mensajes entre dos usuarios
     public function getMessages($userId1, $userId2) {
-        // Aquí iría la lógica para obtener los mensajes de la base de datos
-        global $mysqli;
+        require 'db_conexion.php';
         $messages = [];
 
         $stmt = $mysqli->prepare("CALL ver_mensajes(?, ?)");
         if (!$stmt) {
-            // si falla la preparación, devolver array vacío o manejar error
             return $messages;
         }
 
@@ -44,8 +41,8 @@ class MessagesController {
                 }
                 $result->free();
             } else {
-                // En algunos entornos MySQLi no devuelve get_result() para procedimientos,
-                // se podría usar bind_result/store_result aquí si fuese necesario.
+                // Manejar error en la obtención de resultados
+                return $messages;
             }
         }
         $stmt->close();
