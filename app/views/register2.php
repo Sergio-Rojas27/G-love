@@ -47,22 +47,59 @@
 
     <div class="register-container">
         <input type="text" class="form-input" placeholder="Buscar Juegos">
-        <i class='icono'><img id="search" src="media/search.png" alt=""></i>
+        <i class='icono'><img id="search1" src="media/search.png" alt=""></i>
+    </div>
+    <div class="container-scroll-y">
+        <!-- Todos son de prueba, reemplazar por while y llenado -->
+        <div class="container-item-scroll">
+            <input type="checkbox">
+            <p class="texto-general">Fortnite</p>
+        </div>
+        <div class="container-item-scroll">
+            <input type="checkbox">
+            <p class="texto-general">Fortnite</p>
+        </div>
+        <div class="container-item-scroll">
+            <input type="checkbox">
+            <p class="texto-general">Fortnite</p>
+        </div>
+        <div class="container-item-scroll">
+            <input type="checkbox">
+            <p class="texto-general">Fortnite</p>
+        </div>
     </div>
         
         </div>
         <!-- UY PAPA MIGUEL NO TENGO NI PUTA IDEA DE COMO HACER LO DE LA CI Y LAS IMAGENES, BUENA SUERTE -->
     </div>
-    <section class="checkbox-container">
-        <div class="container">
-            <input required type="checkbox" id="terminos" name="terminos" value="si">
-            <p class="texto-general">Terminos y condiciones</p>
+
+    <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Cuéntanos sobre ti</p>
+    <div class="container-form">
+        <div class="register-container">
+            <input type="text" class="form-input" placeholder="Buscar Cualidades (max 6)">
+            <i class='icono'><img id="search2" src="media/search.png" alt=""></i>
         </div>
-        <div class="container">
-            <input required type="checkbox" id="privacidad" name="privacidad" value="si">
-            <p class="texto-general">Política de privacidad</p>
+        <div class="container-scroll-y">
+            <!-- Todos son de prueba, reemplazar por while y llenado -->
+            <div class="container-item-scroll">
+                <input type="checkbox">
+                <p class="texto-general">Fortnite</p>
+            </div>
+            <div class="container-item-scroll">
+                <input type="checkbox">
+                <p class="texto-general">Fortnite</p>
+            </div>
+            <div class="container-item-scroll">
+                <input type="checkbox">
+                <p class="texto-general">Fortnite</p>
+            </div>
+            <div class="container-item-scroll">
+                <input type="checkbox">
+                <p class="texto-general">Fortnite</p>
+            </div>
         </div>
-    </section>
+    </div>
+    
     
     <div class="buttons-container">
         <a href="?home"><button class="gradiente-morado">Atrás</button></a>
