@@ -34,6 +34,45 @@ button{
         rgba(0, 0, 0, 0.5);
 }
 
+.form-input-40{
+    width: 40%;
+    border-radius: 1rem;
+    height: 2.5rem;
+    margin: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
+    color: white;
+    padding-left: 0.6rem;
+
+    box-shadow: 
+        10px 10px /* Desplazamiento a la derecha y abajo */
+        15px      /* Desenfoque */
+        -5px      /* Propagación negativa (opcional, ayuda a concentrarla) */
+        rgba(0, 0, 0, 0.5);
+}
+
+.form-input-distancia{
+    width: 40%;
+    border-radius: 1rem;
+    height: 2.5rem;
+    margin: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
+    color: white;
+    padding-left: 0.6rem;
+    padding-right: 3rem;
+
+    box-shadow: 
+        10px 10px /* Desplazamiento a la derecha y abajo */
+        15px      /* Desenfoque */
+        -5px      /* Propagación negativa (opcional, ayuda a concentrarla) */
+        rgba(0, 0, 0, 0.5);
+}
+
 select option {
     background-color: #2D0084; 
     color: white;

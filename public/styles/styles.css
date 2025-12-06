@@ -138,6 +138,11 @@ Body, html {
     border-radius: 40%;
 }
 
+.icono {
+    z-index: 3;
+    margin-left: -3rem;
+    cursor: pointer;
+}
 
 .bx {
     font-size: 1.875rem;
@@ -152,5 +157,30 @@ Body, html {
 }
 
 .file-name {
+    justify-content: center;
+    align-items: center;
     color: #ffffff7e;
+    border-bottom: 0.1rem solid #ffffff7e;
+    margin-left: 1rem;
+    padding-bottom: 2px;
 }
+
+  .input-sin-fondo {
+    width: 90%;
+    height: 1rem;
+    margin-left: 2.5%;
+    background-color: transparent; /* Hace el fondo invisible */
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el contorno azul al enfocar */
+    color: #ffffff7e; /* Color del texto dentro del input */
+    font-size: 1rem;
+    padding-left: 1rem;
+    padding: 10px;
+    /* Puedes añadir un estilo para que se vea mejor, como un subrayado */
+    border-bottom: 1px solid #ffffff;
+    transition: border-bottom-color 0.3s ease;
+  }
+
+  .input-sin-fondo:focus {
+    border-bottom-color: #ffffff7e; /* Cambia el color del subrayado al enfocar */
+  }

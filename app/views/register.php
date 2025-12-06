@@ -26,7 +26,7 @@
             <span class="texto-general">Nacimiento: </span>
             <input required type="date" name="nacimiento" id="nacimiento">
         </section>
-        <div class="buttons-container">
+        <div class="file-container">
             <label for="cedula">
                 <input required type="file" class="upload-button-styled" name="cedula" id="cedula" accept="image/*" required>
                 <img src="media/Btn-Upload.png" alt="">
