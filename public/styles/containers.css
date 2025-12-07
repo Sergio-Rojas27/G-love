@@ -35,10 +35,29 @@
     display: flex;
     align-items: center;
     height: 2.5rem;
-    width: 100%;
+    width: 90%;
     margin-top: 2%;
     margin-bottom: 0.5rem;
     margin-left: 1rem;
+}
+
+.container-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin-top: 2%;
+    margin-left: 1rem;
+}
+
+.container-between{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    width: 100%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
 }
 
 .register-container{
@@ -70,9 +89,21 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 5%; 
+    margin-bottom: 5%;
 
     display: flex;
     justify-content: space-between; 
+    align-items: center;
+}
+
+.file-container{
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2.5%;
+
+    display: flex;
+    justify-content: center; 
     align-items: center;
 }
 
@@ -87,8 +118,8 @@
     margin-left: 10%;
     background-color: #27134e; 
     border-radius: 1rem;  
-    padding-top: 5%;
-    padding-bottom: 5%;
+    padding-top: 0.45rem;
+    padding-bottom: 1.25rem;
 
     box-shadow: 
         inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
@@ -121,4 +152,41 @@ input[type="checkbox"] {
     /* 3. Tipografía */
     font-size: 16px;
     color: #ffffff7e;
+}
+
+.container-scroll-y {
+    margin-top: 0;
+    height: 12rem;
+    overflow-y: scroll; 
+    border-radius: 1rem;
+
+    /* Estilos adicionales opcionales para visualización */
+    width: 80%;
+    padding: 10px;
+    background: linear-gradient(#56467E, #36294A);
+
+    box-shadow: 
+        inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
+}
+
+.container-scroll-y::-webkit-scrollbar {
+  display: none; /* La propiedad clave */
+}
+
+.container-item-scroll {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: transparent;
+    border: #ffffff7e;
+    color: white;
+    font-size: 1rem;
+}
+
+#container_nacimiento {
+    text-align: left;
+    display: flex;
+    margin-left: 0;
+    margin-right: auto;
 }

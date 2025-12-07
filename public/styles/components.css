@@ -51,6 +51,45 @@ button{
         rgba(0, 0, 0, 0.5);
 }
 
+.form-input-40{
+    width: 40%;
+    border-radius: 1rem;
+    height: 2.5rem;
+    margin: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
+    color: white;
+    padding-left: 0.6rem;
+
+    box-shadow: 
+        10px 10px /* Desplazamiento a la derecha y abajo */
+        15px      /* Desenfoque */
+        -5px      /* Propagación negativa (opcional, ayuda a concentrarla) */
+        rgba(0, 0, 0, 0.5);
+}
+
+.form-input-distancia{
+    width: 40%;
+    border-radius: 1rem;
+    height: 2.5rem;
+    margin: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    background: linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
+    color: white;
+    padding-left: 0.6rem;
+    padding-right: 3rem;
+
+    box-shadow: 
+        10px 10px /* Desplazamiento a la derecha y abajo */
+        15px      /* Desenfoque */
+        -5px      /* Propagación negativa (opcional, ayuda a concentrarla) */
+        rgba(0, 0, 0, 0.5);
+}
+
 select option {
     background-color: #2D0084; 
     color: white;
@@ -62,4 +101,51 @@ input[type="file"] {
 
 .upload-button-styled {
     display: none;
+}
+
+.img-perfil{
+    width: 6.5rem;
+    height: 6.5rem;
+    border-radius: 1rem;
+}
+
+.img-general{
+    width: 5.625rem;
+    height: 5.625rem;
+    border-radius: 1rem;
+}
+
+input[type="date"] {
+    /* Step 1: Remove the default styling on WebKit browsers */
+    -webkit-appearance: none;
+    
+    /* Step 2: Remove the default border and background */
+    border: none;
+    background: transparent;
+    
+    /* You may need to specify a color for the text, 
+       otherwise it might be the default system color */
+    color: white;
+
+    /* Other basic styles */
+    font-family: Arial, sans-serif;
+    padding: 10px;
+/* Custom Box Styling */
+    border-radius: 1rem;
+    background-color:linear-gradient(180deg, #5D00E8 0%, #2D0084 100%);
+
+    
+    /* Custom Text Styling */
+    font-size: 1rem;
+    line-height: 1.5;
+    
+    width: 10%;
+    height: 2.5rem;
+    margin: 2.5%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    /* Change the color of the placeholder text */
+    /* Note: This only works before a date is selected */
+    color: #555;
 }
