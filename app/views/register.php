@@ -2,7 +2,7 @@
     $titulo_header = 'Registro';
     require_once __DIR__ . '../../templates/header.php';
 ?>
-<form action="" method="POST">
+<form action="" method="POST"  class="form-todo">
 <div class="container-form">
         <input required type="text" id="nombre" name="nombre" class="form-input" placeholder="Nombre">
         <input required type="text" id="apellido" name="apellido" class="form-input" placeholder="Apellido">
@@ -22,11 +22,11 @@
             <option value="otro">Otro</option>
             <option value="ninguno">Prefiero no decirlo</option>
         </select>
-        <section style="margin-top: 5%">
+        <section id='container-nacimiento' style="margin-top: 5%">
             <span class="texto-general">Nacimiento: </span>
             <input required type="date" name="nacimiento" id="nacimiento">
         </section>
-        <div class="buttons-container">
+        <div class="file-container">
             <label for="cedula">
                 <input required type="file" class="upload-button-styled" name="cedula" id="cedula" accept="image/*" required>
                 <img src="media/Btn-Upload.png" alt="">
@@ -49,9 +49,9 @@
     </section>
     
     <div class="buttons-container">
-        <a href="?home"><button class="gradiente-morado">Atrás</button></a>
+        <a href="?home"><button formnovalidate class="gradiente-morado">Atrás</button></a>
 
-        <button type="submit" class="gradiente-verde">Siguiente</button>
+        <a href="?register2"><button type="submit" name="registro_pag1" class="gradiente-verde">Siguiente</button></a>
     </div> 
 </div> 
 </form>

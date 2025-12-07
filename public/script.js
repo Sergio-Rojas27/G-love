@@ -70,3 +70,19 @@ inputArchivo.addEventListener('change', function() {
         displayNombre.textContent = 'Ningún archivo seleccionado.';
     }
 });
+
+
+// no funciono, despues veo porque
+const checkbox = document.getElementById('mundo');
+const inputText = document.getElementById('distancia');
+
+checkbox.addEventListener('change', function() {
+  if (checkbox.checked) {
+    inputText.readOnly = true; 
+    inputText.value = ''; 
+  } else {
+    inputText.readOnly = false;
+  }
+});
+
+// no funciono, despues veo porque
