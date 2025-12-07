@@ -2,8 +2,8 @@
 session_start();
 require_once '../app/controllers/db_conexion.php';
 $ruta = __DIR__;
-$titulo = 'Game Lovers';
 $pagina_solicitada = 'home'; // default a la pagina de titulo
+$titulo = 'Game Lovers';
 $dir_vistas = '../app/views/';
 $vista;
 
@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         else
         {
             $fila = $resultados->fetch_assoc();
-            $url_destino = '?register';
-            // if credenciales coinciden destino='?feed' y usuarios en session[]
+            $url_destino = '?feed';
+            $_SESSION['usuario_id'] = $fila['id_user'];
             unset($_SESSION['message_login']);
         }
     }
