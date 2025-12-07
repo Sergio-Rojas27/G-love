@@ -29,6 +29,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'register4';
     }
+    if (isset($_GET['feed']))
+    {
+        $pagina_solicitada = 'feed';
+    }
     if (isset($_GET['login']))
     {
         $pagina_solicitada = 'login';

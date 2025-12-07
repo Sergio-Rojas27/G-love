@@ -1,5 +1,5 @@
 <?php 
-    $titulo_header = 'Registro';
+    $titulo_header = 'Game Lovers';
     require_once __DIR__ . '../../templates/header.php';
 ?>
 <form action="" method="POST" class="form-todo">
