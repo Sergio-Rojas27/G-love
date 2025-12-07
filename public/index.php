@@ -39,6 +39,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'login';
     }
+    if (isset($_GET['messaging']))
+    {
+        $pagina_solicitada = 'messaging';
+    }
+    if (isset($_GET['chats']))
+    {
+        $pagina_solicitada = 'chats';
+    }
+    if (isset($_GET['interacciones']))
+    {
+        $pagina_solicitada = 'interacciones';
+    }
     if (isset($_GET['register2']))
     {
         $pagina_solicitada; // como sea que la haya llamado sergio
