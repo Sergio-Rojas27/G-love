@@ -95,7 +95,39 @@ input[type="file"] {
 .img-general{
     width: 5.625rem;
     height: 5.625rem;
-    border-radius: 1rem;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 2rem;
+    height: 2rem;
+    background-color: linear-gradient(#5C467E 100%, #36294A 100%);
+    border-radius: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+input[type="checkbox"]::after {
+    font-family: 'open-sans', sans-serif;
+    font-weight: 900;
+    content: '✓';
+    color: white;
+    display: none;
+}
+
+input[type="checkbox"]:hover {
+    background-color: #a5a5a5;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #5C467E;
+}
+
+input[type="checkbox"]:checked::after {
+    display: block;
 }
 
 input[type="date"] {
