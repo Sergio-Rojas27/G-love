@@ -10,7 +10,11 @@
     require 'messages.php';
     $messagesController = new MessagesController();
     // Ejemplo de envío de mensaje
-    $mensajes = $messagesController->getMessages(8, 9);
+    $mensajes = $messagesController->getMessages(9, 8);
+    $chats = $messagesController->getChats(8);
+    foreach($chats as $chat){
+        echo "<p>Chat con: " . htmlspecialchars($chat['usernameChat']) . "</p>";
+    }
     ?>
     <div style="width: 30%; margin: auto; border: 1px solid #ccc; padding: 10px; box-shadow: 2px 2px 12px #aaa; display: flex; flex-direction: column;">
     <?php
