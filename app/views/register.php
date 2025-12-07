@@ -30,7 +30,7 @@
         <label for="terminos">Política de privacidad</label>
     </section>
     <div class="buttons-container">
-        <button type="submit" class="gradiente-verde">Siguiente</button>
+        <button type="submit" name="registro_pag1" class="grad-verde">Siguiente</button>
 </div> 
 </form>
         <a href="?home"><button class="gradiente-morado">Atrás</button></a>
