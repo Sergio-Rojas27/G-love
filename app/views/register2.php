@@ -34,13 +34,13 @@
     </div>
 
     <div class="container">
-        <input required type="text" id="distancia" name="distancia" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-input-distancia">
+        <input required type="text" id="distance" name="distance" maxlength="15" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="form-input-distancia">
         <p class="texto-general" style="z-index: 3; margin-left: -50px;">km</p> <br>
         <p class="texto-general" style="z-index: 3; margin-left: 30px;">Distancia máxima</p>
     </div>
     <section class="container">
         <div class="container">
-            <input required type="checkbox" id="mundo" name="mundo" value="si">
+            <input required type="checkbox" id="world" name="world" value="si">
             <p class="texto-general">Todo el Mundo</p>
         </div>
     </section>
@@ -109,4 +109,4 @@
 </div> 
 </form>
 
-<script src="script.js"></script>
+<script src="check.js"></script>
