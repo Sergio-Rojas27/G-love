@@ -22,7 +22,7 @@
             <option value="otro">Otro</option>
             <option value="ninguno">Prefiero no decirlo</option>
         </select>
-        <section style="margin-top: 5%">
+        <section id='container-nacimiento' style="margin-top: 5%">
             <span class="texto-general">Nacimiento: </span>
             <input required type="date" name="nacimiento" id="nacimiento">
         </section>
@@ -49,9 +49,9 @@
     </section>
     
     <div class="buttons-container">
-        <a href="?home"><button class="gradiente-morado">Atrás</button></a>
+        <a href="?home"><button formnovalidate class="gradiente-morado">Atrás</button></a>
 
-        <a href="?register2"><button class="gradiente-verde">Siguiente</button></a>
+        <a href="?register2"><button type="submit" name="registro_pag1" class="gradiente-verde">Siguiente</button></a>
     </div> 
 </div> 
 </form>

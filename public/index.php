@@ -1,7 +1,9 @@
 <?php
+session_start();
+require_once '../app/controllers/db_conexion.php';
 $ruta = __DIR__;
-$titulo = 'Game Lovers';
 $pagina_solicitada = 'home'; // default a la pagina de titulo
+$titulo = 'Game Lovers';
 $dir_vistas = '../app/views/';
 $vista;
 
@@ -37,6 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'login';
     }
+    if (isset($_GET['register2']))
+    {
+        $pagina_solicitada; // como sea que la haya llamado sergio
+    }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
 }
@@ -48,12 +54,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     if (isset($_POST['enter_login']))
     {
-        $url_destino = '?home'; // temporalmente mientras esta listo el incio
-        $usuario = htmlspecialchars($_POST['user']) ?? null;
+        $usuario_correo = htmlspecialchars($_POST['user']) ?? null;
         $contrasena = htmlspecialchars($_POST['password']) ?? null;
         $ingreso_valido = false;
+        
         // logica para corrocoquear base de datos
-        // if credenciales coinciden destino='?feed' y usuarios en session[]
+        $stmt = $mysqli->prepare('SELECT email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
+        $stmt->bind_param('ss', $contrasena, $usuario_correo);
+        $stmt->execute();
+        $resultados = $stmt->get_result();
+        
+        if ($resultados->num_rows == 0)
+        {
+            $url_destino = '?login';
+            $_SESSION['message_login'] = 'Credenciales invalidas';
+        }
+        else
+        {
+            $fila = $resultados->fetch_assoc();
+            $url_destino = '?feed';
+            $_SESSION['usuario_id'] = $fila['id_user'];
+            unset($_SESSION['message_login']);
+        }
+    }
+
+    if (isset($_POST['registro_pag1']))
+    {
+        $url_destino = 'register2';
+
+        $nombre = htmlspecialchars($_POST['nombre']);
+        $apellido = htmlspecialchars($_POST['apellido']);
+        $correo = htmlspecialchars($_POST['correo']);
+        $contrasena = htmlspecialchars($_POST['contrasena']);
+        $confirmacion = htmlspecialchars($_POST['confirmacion']);
+        $sexo = htmlspecialchars($_POST['sexo']);
+        $cedula = htmlspecialchars($_POST['cedula']);
+        $nacimiento = htmlspecialchars($_POST['nacimiento']);
+        $terminos =  htmlspecialchars($_POST['terminos']);
+        $privacidad =  htmlspecialchars($_POST['privacidad']);
 
     }
     
