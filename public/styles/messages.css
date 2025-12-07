@@ -72,12 +72,14 @@
     text-align: right; 
     background: linear-gradient(0deg, #5D00E8 100%, #2D0084 0%);
     margin: 0% 5% 0% 5%;
-    padding: 3%; 
+    padding: 3%;
+    padding-bottom: 5%;
     border-radius: 1rem; 
     display: inline-block; 
     max-width: 80%; 
     margin-left:auto;
     color: white;
+    position: relative;
 }
 
 .recived-message{
@@ -85,11 +87,19 @@
     background: linear-gradient(0deg, #56467E 100%, #36294A 0%);
     color:white;
     margin: 0% 5% 0% 5%;
-    padding: 3%; 
+    padding: 3%;
+    padding-bottom: 5%;
     border-radius: 1rem; 
     display: inline-block; 
     max-width: 80%; 
     margin-right:auto;
+    position: relative;
+}
+.hour-span {
+    font-size: 0.6rem;
+    position: absolute;
+    bottom: 5%;
+    right: 7%;
 }
 
 .info-btn {

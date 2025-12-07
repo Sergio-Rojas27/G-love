@@ -27,9 +27,9 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
         $hora_db = new DateTime($row['send_on']);
 
         if($row['Sended']) {
-            echo "<div class='sended-message'>" . htmlspecialchars($row['message']) ."<span style='font-size: 0.6rem'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
+            echo "<div class='sended-message'>" . htmlspecialchars($row['message']) ."<span class='hour-span'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
         } else {
-            echo "<div class='recived-message'>" . htmlspecialchars($row['message']) . "<span style='font-size: 0.6rem'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
+            echo "<div class='recived-message'>" . htmlspecialchars($row['message']) . "<span class='hour-span'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
         }
     }
 ?>

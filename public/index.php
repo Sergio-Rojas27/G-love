@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
-    $vista = $dir_vistas . 'messaging' . '.php';
+    $vista = $dir_vistas . 'chats' . '.php';
 }
 
 // todas las solicitudes donde se sube un form o un dato pasan por aqui y se usar header() para redireccionar al get apropiado
