@@ -39,13 +39,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'login';
     }
+    if (isset($_GET['messaging']))
+    {
+        $pagina_solicitada = 'messaging';
+    }
+    if (isset($_GET['chats']))
+    {
+        $pagina_solicitada = 'chats';
+    }
+    if (isset($_GET['interacciones']))
+    {
+        $pagina_solicitada = 'interacciones';
+    }
     if (isset($_GET['register2']))
     {
         $pagina_solicitada; // como sea que la haya llamado sergio
     }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
-    $vista = $dir_vistas . 'chats' . '.php';
 }
 
 // todas las solicitudes donde se sube un form o un dato pasan por aqui y se usar header() para redireccionar al get apropiado

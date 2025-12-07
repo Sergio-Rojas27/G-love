@@ -185,3 +185,124 @@
     transition: transform 0.2s;
     flex-shrink: 0; /* Evita que el botón se aplaste */
 }
+
+.match-card {
+    display: flex;
+    gap: 2%; /* Espacio entre la foto y el contenido derecho */
+    width: 90%;
+    padding: 5%;
+}
+
+.profile-pic {
+    width: 25%;
+    height: auto;
+    border-radius: 1rem; /* Bordes redondeados suaves */
+    object-fit: cover;
+    flex-shrink: 0; /* Evita que la imagen se aplaste */
+  }
+
+  /* --- COLUMNA DERECHA --- */
+  .right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 80%;
+    gap: 0.5rem;
+  }
+
+  /* --- BURBUJA DE NOTIFICACIÓN --- */
+  .info-bubble {
+    background: linear-gradient(180deg, #534c75 0%, #3e3a58 100%);
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 85%;
+    color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  .username {
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 0;
+  }
+
+  .timestamp {
+    font-size: 0.8rem;
+    color: #ccc;
+    display: block;
+    margin-bottom: 0.20rem;
+  }
+
+  .message {
+    font-size: 1rem;
+  }
+
+  .hearts {
+    color: #ff4081; /* Color rosado para los corazones */
+    font-size: 1.2rem;
+  }
+    .gheart {
+    color: #00B17E; /* Color rosado para los corazones */
+    font-size: 1.2rem;
+  }
+
+  /* --- BOTONES DE ACCIÓN --- */
+  .actions {
+    display: flex;
+    width: 100%;
+    gap: 0.3rem;
+  }
+
+  /* Botón Chatear */
+  .btn-chat {
+    width: 25%;
+    background: linear-gradient(180deg, #00B17E 0%, #005B41 100%);
+    flex-grow: 1; /* Ocupa todo el espacio posible */
+    border: none;
+    border-radius: 1rem;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 2%;
+    transition: transform 0.1s;
+  }
+
+  /* Botón Eliminar */
+  .btn-delete {
+    background: linear-gradient(0deg, #8E0036 0%, #FF0066 100%);
+    width: 3rem; 
+    height: auto;
+    aspect-ratio: 1/1;
+    border: none;
+    border-radius: 14px; /* Un poco más cuadrado que el de chatear */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+    padding: 0;
+  }
+  .trash-icon {
+  width: 50%; /* Ocupa la mitad del botón, ajusta este % a tu gusto */
+  aspect-ratio: 1/1;
+  height: auto; /* Mantiene la proporción de la imagen */
+  display: block; /* Evita espacios fantasma debajo de la imagen */
+  object-fit: contain;
+}
+
+  .btn-chat:active, .btn-delete:active {
+    transform: scale(0.95); /* Efecto de click */
+  }
+
+  /* Icono SVG de la papelera */
+  .icon-trash {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
