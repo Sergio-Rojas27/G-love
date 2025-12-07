@@ -51,7 +51,7 @@
     <div class="buttons-container">
         <a href="?home"><button class="gradiente-morado">Atrás</button></a>
 
-        <a href="?register2"><button class="gradiente-verde">Siguiente</button></a>
+        <a href="?register2"><button type="submit" name="registro_pag1" class="gradiente-verde">Siguiente</button></a>
     </div> 
 </div> 
 </form>

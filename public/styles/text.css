@@ -24,3 +24,9 @@
     font-size: 1rem;
     font-family: 'open-sans', sans-serif;
 }
+
+#message_login {
+    font-family: 'LEMON-MILK-Regular';
+    text-align: center;
+    color: red; /* temporal */
+}

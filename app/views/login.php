@@ -6,6 +6,9 @@
 
 <div class="container-form-login" style="margin-top: 1.5rem;">
     <form method="POST" action="">
+        <?php if (isset($_SESSION['message_login'])): ?>
+            <p id="" class="texto-general"><?php echo $_SESSION['message_login'] ?></p>
+        <?php endif ?>
         <input required type="text" id="Usuario" name="user" class="form-input" placeholder="Usuario" style="color: white; padding-left: 1rem;">
         <div class="container" style="justify-content: center; align-items: center;">
             <input required type="password" id="password" name="password" class="form-input" placeholder="Contraseña" style="color: white; padding-left: 1rem;">
