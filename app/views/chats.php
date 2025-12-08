@@ -19,7 +19,7 @@
 </div>
 
 <?php 
-    $pagina = '3';
+    $pagina = '2';
     require_once __DIR__ . '../../templates/footer.php';
 ?>
 
@@ -30,7 +30,7 @@
             ?>
         <!-- Un Chat -->
          <a href="index.php?messaging&id_chat=<?php echo $chat['contacto_id']; ?>" style="margin: 0; padding: 0; width: 100%; ">
-        <div class="notification-card" style="margin-left: 5%;">
+        <div class="notification-card" style="margin-left: 5%; margin-bottom: 5%;">
             <img src="https://i.pinimg.com/736x/89/66/af/8966af4dfa228308488001646271a742.jpg" alt="Foto de perfil" class="avatar">
             <div class="content">
                 <div class="username"><?php echo htmlspecialchars($chat['usernameChat'])  ?></div>

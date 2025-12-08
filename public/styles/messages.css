@@ -269,6 +269,9 @@
     cursor: pointer;
     padding: 2%;
     transition: transform 0.1s;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
   }
 
   /* Botón Eliminar */
