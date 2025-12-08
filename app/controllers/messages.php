@@ -7,7 +7,7 @@ class MessagesController {
     // Función para enviar un mensaje
     public function sendMessage($fromUserId, $toUserId, $messageContent) {
         global $mysqli;
-        $stmt = $mysqli->prepare("INSERT INTO messages (id_user_from, id_user_to, message) VALUES (?, ?, ?)");
+        $stmt = $mysqli->prepare("INSERT INTO messages (id_user_from, id_user_to, message, send_on) VALUES (?, ?, ?, NOW())");
         if (!$stmt) {
             return "Error al preparar la consulta: " . $mysqli->error;
         }

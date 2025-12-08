@@ -1,20 +1,50 @@
 <?php
 // Logica para recibir que usuario esta hablando con que usuario
-$usuario_actual = 9; // ESTO DEBERIA VENIR DE LA SESSION
-$usuario_chat = 8; // ACA VA EL USUARIO CON EL QUE SE VA A CHATEAR, ESTO DE OBTIENE DE UN POST AL PRESIONAR EL LA TARJETA DE CHAT
 require_once __DIR__ . '../../controllers/messages.php';
 $messagesController = new MessagesController();
+$usuario_actual = $_SESSION['usuario_id']; 
+if (isset($_GET['id_chat'])) {
+    $usuario_chat = intval($_GET['id_chat']);
+}
+if (isset($_POST['id_chat'])) {
+    $usuario_chat = intval($_POST['id_chat']);
+}  
+
+// Logica para obtener el username del usuario con el que se esta chateando
+global $mysqli;
+$stmt = $mysqli->prepare("select username from users where id_user = ?");
+$stmt->bind_param("i", $usuario_chat);
+if ($stmt->execute()) {
+    $result = $stmt->get_result();
+    if ($result) {
+        while ($row = $result->fetch_assoc()) {
+            $username = $row;
+        }
+        $result->free();
+    } 
+}
+$stmt->close();
+
+// Consumir posibles resultados adicionales del procedimiento almacenado
+while ($mysqli->more_results() && $mysqli->next_result()) {
+    $extra = $mysqli->use_result();
+    if ($extra) {
+        $extra->free();
+    }
+}
+
+
 
 $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
 ?>
 <!-- TARJETA DE USUARIO -->
 <div class="header">
     <div class="container">
-        <button class="back-btn" onclick="window.location.href='?chats'">
+            <button class="back-btn" onclick="window.location.href='?chats'">
             <img src="../public/media/back.png" alt="Foto de Perfil no valida" style="width: 2.5rem; height: 2.5rem;">
         </button>
         <img src="#" alt="Foto de Perfil no valida" class="avatar">
-        <div class="username">Nombre Usuario</div>
+        <div class="username"><?php echo $username['username']?></div>
     </div>
     <button class="info-btn" onCliclk="alert('Información del usuario')">
     <img src="../public/media/info.png" alt="Info" style="width: 1.4rem; height: 1.4rem;">
@@ -38,10 +68,11 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
         <form class="chat-form" action="#" method="POST">
             
             <div class="input-wrapper">
-                <input type="text" class="chat-input" placeholder="Mensaje" required>
+                <input type="text" class="chat-input" placeholder="Mensaje" id="message" name="message" required>
             </div>
-
-            <button type="submit" class="send-button">
+            <input type="hidden" name="usuario_id" value="<?php echo $usuario_chat; ?>">
+            <input type="hidden" name="usuario_actual" value="<?php echo $usuario_actual; ?>">
+            <button type="submit" class="send-button" name="send_message">
                 <img src="../public/media/sendMessage.png" alt="">
             </button>
 

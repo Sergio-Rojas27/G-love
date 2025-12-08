@@ -179,6 +179,25 @@ input[type="checkbox"] {
         inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
 }
 
+.container-scroll-y-metas {
+    margin-top: 1rem;
+    height: 18rem;
+    overflow-y: scroll; 
+    border-radius: 1rem;
+
+    /* Estilos adicionales opcionales para visualización */
+    width: 80%;
+    padding: 10px;
+    background: linear-gradient(#56467E, #36294A);
+
+    box-shadow: 
+        inset 10px 10px 30px 3px rgba(0, 0, 0, 0.25);
+}
+
+.container-scroll-y-metas::-webkit-scrollbar {
+  display: none; /* La propiedad clave */
+}
+
 .container-scroll-y::-webkit-scrollbar {
   display: none; /* La propiedad clave */
 }
@@ -189,7 +208,7 @@ input[type="checkbox"] {
     align-items: center;
     padding: 0.5rem;
     background-color: transparent;
-    border: #ffffff7e;
+    border-bottom: 3px solid #ffffff7e;
     color: white;
     font-size: 1rem;
 }
