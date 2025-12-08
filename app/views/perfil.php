@@ -92,6 +92,8 @@
         </div>
     </div>
 
+    <button class="gradiente-verde" name="guardar_fotos" style="margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Guardar Cambios</button>
+
 </form>
 
 <?php 

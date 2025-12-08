@@ -433,6 +433,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $_SESSION['i'] += 1;
     }
 
+    if (isset($_POST['guardar_fotos'])) 
+    {
+        $url_destino = '?perfil';
+        // eliminar las fotos asociadas al usuario en la bdd
+        $stmt = $mysqli->prepare('DELETE FROM users_photos WHERE id_user = ?;');
+        $stmt->bind_param('i', $_SESSION['usuario_id']);
+        $stmt->execute();
+
+        // eliminar esas fotos del servidor
+
+    }
+
     header("Location: " . $url_destino , true, 303); // redirect por get
     exit;
 }
