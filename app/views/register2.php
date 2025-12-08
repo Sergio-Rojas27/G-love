@@ -89,14 +89,12 @@
             </div>
         <?php endwhile ?>
     </div>
-    
-    
+
+</div> 
     <div class="buttons-container">
         <a href="?register" class="gradiente-morado button-fake">Atrás</a>
         <button type="submit" class="gradiente-verde" name="registro_pag2">Siguiente</button>
     </div> 
-
-</div> 
 </form>
 
 <script src="check.js"></script>
