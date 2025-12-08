@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-11-2025 a las 01:23:29
+-- Tiempo de generación: 06-12-2025 a las 15:16:43
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -25,6 +25,73 @@ DELIMITER $$
 --
 -- Procedimientos
 --
+CREATE DEFINER=`root`@`localhost` PROCEDURE `obtenerLikesHaciaPersona` (IN `p_user_id` INT)   BEGIN
+    SELECT
+        li.id_user_from,
+        li.visible,
+        (
+            SELECT COUNT(l2.id_like)
+            FROM likes l2
+            WHERE l2.id_user_from = p_user_id
+              AND l2.id_user_to = li.id_user_from
+        ) AS alreadyLikedBack
+    FROM likes li
+    WHERE li.id_user_to = p_user_id;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `posibles_matches` (IN `target_user_id` INT)   BEGIN
+    /*
+      Lógica:
+      1. Buscamos usuarios que compartan TAGS con el usuario objetivo.
+      2. Buscamos usuarios que compartan JUEGOS con el usuario objetivo.
+      3. Sumamos ambas coincidencias para crear un 'score' de afinidad.
+      4. Excluimos al propio usuario de la lista.
+    */
+
+    SELECT
+        u.id_user,
+        u.first_name,
+        u.last_name,
+        u.email,
+        -- Cálculo del puntaje total (Score)
+        (COALESCE(tag_matches.matches_count, 0) + COALESCE(game_matches.matches_count, 0)) AS affinity_score,
+        -- Información detallada para depuración o UI
+        COALESCE(tag_matches.matches_count, 0) AS shared_tags_count,
+        COALESCE(game_matches.matches_count, 0) AS shared_games_count
+
+    FROM users u
+
+             -- JOIN 1: Calcular coincidencias de TAGS
+             LEFT JOIN (
+        SELECT
+            t2.id_user,
+            COUNT(*) as matches_count
+        FROM users_tags t1
+                 JOIN users_tags t2 ON t1.id_tag = t2.id_tag
+        WHERE t1.id_user = target_user_id
+          AND t2.id_user != target_user_id
+        GROUP BY t2.id_user
+    ) AS tag_matches ON u.id_user = tag_matches.id_user
+
+        -- JOIN 2: Calcular coincidencias de JUEGOS
+             LEFT JOIN (
+        SELECT
+            g2.id_user,
+            COUNT(*) as matches_count
+        FROM users_games g1
+                 JOIN users_games g2 ON g1.id_game = g2.id_game
+        WHERE g1.id_user = target_user_id
+          AND g2.id_user != target_user_id
+        GROUP BY g2.id_user
+    ) AS game_matches ON u.id_user = game_matches.id_user
+
+    WHERE
+         u.id_user != target_user_id
+
+    ORDER BY
+        affinity_score DESC; -- Ordenado de más coincidencia a menos
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_asociar_juego_categoria` (IN `p_game_name` VARCHAR(250), IN `p_tag_name` VARCHAR(250))   BEGIN
     -- Declaramos variables para guardar los IDs
     DECLARE v_id_game INT;
@@ -68,6 +135,19 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_asociar_juego_categoria` (IN `p_
     END IF;
 
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_matches_persona` (IN `_personaId` INT)   begin
+    SELECT A.id_user_from
+    FROM likes A
+             JOIN likes B
+                  ON A.id_user_from = B.id_user_to
+    WHERE A.id_user_to = _personaId
+      AND B.id_user_from = _personaId;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ver_mensajes` (IN `_personaIdLogin` INT, IN `_personaIdChat` INT)   begin
+        select id_user_from, id_user_to, message, send_on, (id_user_from = _personaIdLogin) as Sended from messages where (id_user_from = _personaIdLogin and id_user_to = _personaIdChat) or (id_user_to = _personaIdLogin and id_user_from = _personaIdChat) order by send_on;
+    end$$
 
 DELIMITER ;
 
@@ -339,6 +419,59 @@ CREATE TABLE `likes` (
   `visible` tinyint(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `likes`
+--
+
+INSERT INTO `likes` (`id_like`, `id_user_from`, `id_user_to`, `visible`) VALUES
+(1, 9, 12, 1),
+(2, 12, 9, 1),
+(5, 8, 15, 1),
+(6, 11, 13, 0),
+(7, 14, 10, 1),
+(8, 10, 14, 1);
+
+--
+-- Disparadores `likes`
+--
+DELIMITER $$
+CREATE TRIGGER `corroborarMatch` AFTER INSERT ON `likes` FOR EACH ROW BEGIN
+    DECLARE mutual_like_count INT;
+
+    SELECT COUNT(*) INTO mutual_like_count
+    FROM likes
+    WHERE id_user_from = NEW.id_user_to
+      AND id_user_to = NEW.id_user_from
+      AND visible = 1; -- Nose como llevar esto, solo matches a partir de likes visibles?
+
+    -- Si el conteo es mayor a 0, significa que hay match
+    IF mutual_like_count > 0 THEN
+        INSERT INTO matches (id_user1, id_user2)
+        VALUES (NEW.id_user_from, NEW.id_user_to);
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `matches`
+--
+
+CREATE TABLE `matches` (
+  `id_match` int NOT NULL,
+  `id_user1` int NOT NULL,
+  `id_user2` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `matches`
+--
+
+INSERT INTO `matches` (`id_match`, `id_user1`, `id_user2`) VALUES
+(1, 10, 14);
+
 -- --------------------------------------------------------
 
 --
@@ -352,6 +485,16 @@ CREATE TABLE `messages` (
   `message` varchar(250) NOT NULL,
   `send_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `messages`
+--
+
+INSERT INTO `messages` (`id_message`, `id_user_from`, `id_user_to`, `message`, `send_on`) VALUES
+(1, 9, 8, 'Mira chamo, arregla el front porfa', '2025-12-05 20:58:36'),
+(2, 8, 9, 'Solo si primero te pones a chambear en la bdd', '2025-12-05 20:59:01'),
+(3, 9, 8, 'Ya esta lista, mira el sql', '2025-12-05 20:59:24'),
+(4, 8, 9, 'Oka, voy pa esa', '2025-12-05 20:59:33');
 
 -- --------------------------------------------------------
 
@@ -448,6 +591,20 @@ CREATE TABLE `users` (
   `verified` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `first_name`, `last_name`, `email`, `password`, `gender`, `birth`, `identification_number`, `verified`) VALUES
+(8, 'Sergio', 'Rojas', 'srojas.1871@unimar.edu.ve', 'webiwabo', 'hombre', '2006-12-27', 31761871, 1),
+(9, 'Gabriel', 'Vivas', 'gvivas.9287@unimar.edu.ve', 'webiwabo', 'hombre', '2006-09-29', 31729287, 1),
+(10, 'Miguel', 'Vivas', 'mvivas.6152@unimar.edu.ve', 'webiwabo', 'hombre', '2006-01-11', 325266152, 1),
+(11, 'Miguel', 'Arismendi', 'marismendi.8551@unimar.edu.ve', 'webiwabo', 'hombre', '2006-06-27', 31348551, 1),
+(12, 'Ana', 'Hernandez', 'ahernandez.0972@unimar.edu.ve', 'webiwabo', 'mujer', '2007-05-31', 32890972, 1),
+(13, 'Patroclo', 'Unimarista', 'punimarista.1512@unimar.edu.ve', 'webiwabo', 'otro', '2012-06-12', 3281512, 1),
+(14, 'Isabella', 'Garrido', 'igarrido.7420@unimar.edu.ve', 'webiwabo', 'mujer', '2006-07-23', 31257420, 1),
+(15, 'Aymara', 'Vasquez', 'avasquez.@unimar.edu.ve', 'webiwabo', 'mujer', '2006-12-27', 31690940, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -460,6 +617,26 @@ CREATE TABLE `users_games` (
   `id_game` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Volcado de datos para la tabla `users_games`
+--
+
+INSERT INTO `users_games` (`id_user_game`, `id_user`, `id_game`) VALUES
+(1, 8, 42),
+(2, 8, 7),
+(3, 9, 42),
+(4, 9, 32),
+(5, 8, 10),
+(6, 8, 23),
+(7, 9, 23),
+(8, 9, 25),
+(9, 8, 25),
+(10, 11, 25),
+(11, 11, 23),
+(12, 11, 42),
+(13, 11, 7),
+(14, 11, 10);
+
 -- --------------------------------------------------------
 
 --
@@ -471,6 +648,18 @@ CREATE TABLE `users_tags` (
   `id_user` int NOT NULL,
   `id_tag` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `users_tags`
+--
+
+INSERT INTO `users_tags` (`id_user_tag`, `id_user`, `id_tag`) VALUES
+(1, 9, 46),
+(2, 9, 47),
+(3, 8, 52),
+(4, 11, 52),
+(5, 8, 47),
+(6, 11, 47);
 
 --
 -- Índices para tablas volcadas
@@ -495,6 +684,14 @@ ALTER TABLE `games_tags`
 --
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`id_like`);
+
+--
+-- Indices de la tabla `matches`
+--
+ALTER TABLE `matches`
+  ADD PRIMARY KEY (`id_match`),
+  ADD KEY `id_user1` (`id_user1`),
+  ADD KEY `id_user2` (`id_user2`);
 
 --
 -- Indices de la tabla `messages`
@@ -553,13 +750,19 @@ ALTER TABLE `games_tags`
 -- AUTO_INCREMENT de la tabla `likes`
 --
 ALTER TABLE `likes`
-  MODIFY `id_like` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_like` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT de la tabla `matches`
+--
+ALTER TABLE `matches`
+  MODIFY `id_match` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id_message` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_message` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tags`
@@ -571,19 +774,19 @@ ALTER TABLE `tags`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `users_games`
 --
 ALTER TABLE `users_games`
-  MODIFY `id_user_game` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user_game` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `users_tags`
 --
 ALTER TABLE `users_tags`
-  MODIFY `id_user_tag` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user_tag` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Restricciones para tablas volcadas
@@ -595,6 +798,13 @@ ALTER TABLE `users_tags`
 ALTER TABLE `games_tags`
   ADD CONSTRAINT `games_tags_ibfk_1` FOREIGN KEY (`id_game`) REFERENCES `games` (`id_game`),
   ADD CONSTRAINT `games_tags_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tags` (`id_tag`);
+
+--
+-- Filtros para la tabla `matches`
+--
+ALTER TABLE `matches`
+  ADD CONSTRAINT `matches_ibfk_1` FOREIGN KEY (`id_user1`) REFERENCES `users` (`id_user`),
+  ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`id_user2`) REFERENCES `users` (`id_user`);
 
 --
 -- Filtros para la tabla `messages`

@@ -1,5 +1,19 @@
 /* CONTENEDORES */
-
+.chats-container{
+    display: flex;
+    align-items: center;
+    height: 2.5rem;
+    width: 90%;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.search-container{
+    margin-top: 5%;
+    margin-bottom: 2%;
+    width: 100%;
+}
 .container-form-login{
     align-items: center;
     text-align: center;
@@ -9,7 +23,7 @@
     margin-right: 10%;
     margin-left: 10%;
     background-color: #27134e; 
-    border-radius: 1rem;  
+    border-radius: 14px;  
     padding-top: 5%;
     padding-bottom: 5%;
 
@@ -103,8 +117,8 @@
     margin-right: 10%;
     margin-left: 10%;
     background-color: #27134e; 
-    border-radius: 1rem;  
-    padding-top: 0.75rem;
+    border-radius: 14px;  
+    padding-top: 0.45rem;
     padding-bottom: 1.25rem;
 
     box-shadow: 
@@ -175,4 +189,160 @@ input[type="checkbox"] {
     display: flex;
     margin-left: 0;
     margin-right: auto;
+}
+
+.container-navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 5.25rem;
+    background: linear-gradient(#5D00E8 0%, #2D0084 100%);
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    position: fixed;
+    bottom: 0;
+}
+
+.icono-navbar {
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: auto;
+    cursor: pointer;
+}
+
+.container-center{
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.container-feed-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 5.25rem;
+    background: linear-gradient(#56467E 0%, #36294A 100%);
+    border-radius: 1rem;
+}
+
+.btn-feed-x{
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 14px;
+    background: linear-gradient(#FF0066 0%, #8E0036 100%);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-feed-next{
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 1rem;
+    background: linear-gradient(#5D00E8 0%, #2D0084 100%);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-feed-like{
+    width: 3.75rem;
+    height: 3.75rem;
+    margin: auto;
+    cursor: pointer;
+    border-radius: 14px;
+    background: linear-gradient(#00B17E 0%, #005B41 100%);
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-profile {
+    display: block;
+    width: 80%;
+    height: 30rem;
+    background-image: url('../media/test.jpg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    border-radius: 14px;
+    border: 1px solid #ffffff7e;
+    box-sizing: border-box;
+
+    box-shadow: inset 0 -100px 15rem 0 rgba(0, 0, 0, 0.9);
+}
+
+.container-indicate-img {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10%, 90%));
+    gap: 10px;
+    margin-top: 0;
+    width: 90%;
+    height: 6%;
+    display: flex;
+}
+
+.indicate-img {
+  height: 6px;
+  width: 100%;
+  background-color: white;
+  margin: 15px 0;
+  border-radius: 14px;
+}
+
+.container-info-profile {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10%, 90%));
+    gap: 10px;
+    margin-top: 0;
+    width: 90%;
+    height: 6%;
+    display: flex;
+}
+
+.container-info {
+    display: flex;
+    align-items: center;
+    height: 1rem;
+    width: auto;
+    margin-top: 2%;
+    margin-bottom: 0.5rem;
+    margin-left: 2.5%;
+}
+
+.container-tags {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    width: 100%;
+    height: 2.2rem;
+
+}
+
+.tags {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    height: 2rem;
+    background: linear-gradient(#56467E 0%, #36294A 100%);
+    border-radius: 14px;
 }

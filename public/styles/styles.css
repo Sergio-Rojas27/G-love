@@ -2,6 +2,7 @@
 @import url(colors.css);
 @import url(text.css);
 @import url(containers.css);
+@import url(messages.css);
 
 /* Honestamente no supe en  que categoria meter estos estilos xd */
 
@@ -20,21 +21,19 @@ nav {
 }
 
 Body, html {
-    background: linear-gradient(180deg, #2D0085 0%, #25006D 35.98%, #170044 99.56%);
     width: 100%;
     min-height: 100%;
 }
 
 body {
-  min-height: 100%;
-  
-  /* 2. EVITA QUE EL GRADIENTE SE REPITA */
-  background-repeat: no-repeat; 
-  
-  /* 3. ASEGURA QUE CUBRA TODA LA ALTURA DEL CONTENIDO */
-  /* Esta combinación asegura que el gradiente se estire desde el inicio
-     hasta el final del contenido de la página, sin importar lo largo que sea. */
-  background-size: 100% auto; 
+    background: linear-gradient(180deg, #2D0085 0%, #25006D 35.98%, #170044 99.56%);
+    min-height: 100%;
+    /* 2. EVITA QUE EL GRADIENTE SE REPITA */
+    background-repeat: no-repeat; 
+    /* 3. ASEGURA QUE CUBRA TODA LA ALTURA DEL CONTENIDO */
+    /* Esta combinación asegura que el gradiente se estire desde el inicio
+        hasta el final del contenido de la página, sin importar lo largo que sea. */
+    background-size: 100% auto; 
 }
 
 .form-todo {
