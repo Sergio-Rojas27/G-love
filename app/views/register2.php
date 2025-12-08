@@ -5,8 +5,12 @@
 <form action="" method="POST" class="form-todo">
 <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Cuéntanos que te interesa</p>
 
+<?php if (isset($_SESSION['message_register2'])): ?>
+    <p id="" class="texto-general"><?php echo $_SESSION['message_register2'] ?></p>
+<?php endif ?>
+
 <div class="container-form">
-    <div class="container-between">
+    <div class="container-between" style="margin-top: 1.5rem;">
         <select required name="orientacion" id="genero-fav" class="form-input-40">
             <option value="" selected disabled hidden>Orientación</option>
             <option value="1">Heterosexual</option>
@@ -24,6 +28,7 @@
         </select>
     </div>
 
+    <!--
     <div class="file-container">
         <label for="ubicacion">
             <input required type="file" class="upload-button-styled" name="ubicacion" id="ubicacion" accept="image/*" required>
@@ -44,8 +49,9 @@
             <p class="texto-general">Todo el Mundo</p>
         </div>
     </section>
+    -->
 
-    <div class="register-container">
+    <div class="register-container" style="margin-top: 1.5rem;">
         <input type="text" class="form-input" placeholder="Buscar Juegos">
         <i class='icono'><img id="search1" src="media/search.png" alt=""></i>
     </div>

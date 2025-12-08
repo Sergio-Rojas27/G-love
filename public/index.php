@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     // ejempllo: si href nos manda a "?to_home" se muestra el archivo home.php
     if (isset($_GET['home']))
     {
+
+        unset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad']);
+        unset($_SESSION['reg_orientacion'], $_SESSION['reg_busco'], $_SESSION['reg_ubicacion'], $_SESSION['reg_distancia'], $_SESSION['reg_mundo'], $_SESSION['reg_juegos'], $_SESSION['reg_tags']);
+        unset($_SESSION['reg_nickname']);
+        unset($_SESSION['message_register']);
+        unset($_SESSION['message_register2']);
+        unset($_SESSION['message_register3']);
+
         $pagina_solicitada = 'home';
     }
     if (isset($_GET['register']))
@@ -21,14 +29,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     if (isset($_GET['register2']))
     {
+        // si la pagina 1 del registro no se ha completado, redirigir ahi
+        if (!isset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad']))
+        {
+            header('Location: ?register');
+            exit();
+        }
         $pagina_solicitada = 'register2';
     }
     if (isset($_GET['register3']))
     {
+        // si la pagina 2 del registro no se ha completado, redirigir ahi
+        if (!isset($_SESSION['reg_orientacion'], $_SESSION['reg_busco'], $_SESSION['reg_ubicacion'], $_SESSION['reg_distancia'], $_SESSION['reg_mundo'], $_SESSION['reg_juegos'], $_SESSION['reg_tags']))
+        {
+            header('Location: ?register2');
+            exit();
+        }
         $pagina_solicitada = 'register3';
     }
     if (isset($_GET['register4']))
     {
+        // si la pagina 3 del registro no se ha completado, redirigir ahi
+        if (!isset($_SESSION['reg_juegos'], $_SESSION['reg_tags']))
+        {
+            // limpiar variables de sesion del registro
+            unset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad']);
+            unset($_SESSION['reg_orientacion'], $_SESSION['reg_busco'], $_SESSION['reg_ubicacion'], $_SESSION['reg_distancia'], $_SESSION['reg_mundo'], $_SESSION['reg_juegos'], $_SESSION['reg_tags']);
+            unset($_SESSION['reg_nickname']);
+            header('Location: ?register3');
+            exit();
+        }
+
         $pagina_solicitada = 'register4';
     }
     if (isset($_GET['feed']))
@@ -133,6 +164,61 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $info_valida = isset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad'])
                         && ($_SESSION['reg_contrasena'] === $_SESSION['reg_confirmacion']);
 
+        //verificar que el correo no exista ya en la bdd
+        $stmt = $mysqli->prepare('SELECT id_user FROM users WHERE email = ? LIMIT 1;');
+        $stmt->bind_param('s', $_SESSION['reg_correo']);
+        $stmt->execute();
+        $resultados = $stmt->get_result();
+        if ($resultados->num_rows > 0)
+        {
+            $info_valida = false;
+            $_SESSION['message_register'] = 'El correo ya está en uso.';
+        }
+
+        //verificar que la identificacion no exista tampoco
+        $stmt = $mysqli->prepare('SELECT id_user FROM users WHERE identification_number = ? LIMIT 1;');
+        $stmt->bind_param('s', $_SESSION['reg_cedula']);
+        $stmt->execute();
+        $resultados = $stmt->get_result();
+        if ($resultados->num_rows > 0)
+        {
+            $info_valida = false;
+            $_SESSION['message_register'] = 'El número de identificación ya está en uso.';
+        }
+
+        // verificar que el sexo seleccionado sea una de las opciones disponibles
+        $opciones_sexo = ['1', '2', '3', '4'];
+        if (!in_array($_SESSION['reg_sexo'], $opciones_sexo))
+        {
+            $info_valida = false;
+            $_SESSION['message_register'] = 'Género inválido.';
+        }
+
+        // verificar que la fecha sea valida, mayor de 18 y no posterior a la fecha actual
+        $fecha_nacimiento = DateTime::createFromFormat('Y-m-d', $_SESSION['reg_nacimiento']);
+        $fecha_actual = new DateTime();
+        if (!$fecha_nacimiento || $fecha_nacimiento > $fecha_actual)
+        {
+            $info_valida = false;
+            $_SESSION['message_register'] = 'Fecha de nacimiento inválida.';
+        }
+        else
+        {
+            $edad = $fecha_nacimiento->diff($fecha_actual)->y;
+            if ($edad < 18)
+            {
+                $info_valida = false;
+                $_SESSION['message_register'] = 'Debes ser mayor de 18 años para registrarte.';
+            }
+        }
+
+        // verificar que las contraseñas coincidan
+        if ($_SESSION['reg_contrasena'] !== $_SESSION['reg_confirmacion'])
+        {
+            $info_valida = false;
+            $_SESSION['message_register'] = 'Las contraseñas no coinciden.';
+        }
+
         if ($info_valida)
         {            
             $url_destino = '?register2';
@@ -140,7 +226,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         else
         {
             $url_destino = '?register';
-            $_SESSION['message_register'] = 'Información inválida, por favor verifique e intente de nuevo.';
         }
     }
     
@@ -155,6 +240,52 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $_SESSION['reg_mundo'] = htmlspecialchars($_POST['mundo']) ?? null;
         $_SESSION['reg_juegos'] = $_POST['games'] ?? null;
         $_SESSION['reg_tags'] = $_POST['tags'] ?? null;
+
+        //verificar que los juegos seleccionados existan en la base de datos
+        $juegos_validos = [];
+        foreach ($_SESSION['reg_juegos'] as $id_juego)
+        {
+            $stmt = $mysqli->prepare('SELECT id_game FROM games WHERE id_game = ? LIMIT 1;');
+            $stmt->bind_param('i', $id_juego);
+            $stmt->execute();
+            $resultados = $stmt->get_result();
+            if ($resultados->num_rows > 0)
+            {
+                $juegos_validos[] = $id_juego; // solo agregar si es valido
+            }
+        }
+        $_SESSION['reg_juegos'] = $juegos_validos;
+
+        //verificar que las etiquetas seleccionadas existan en la base de datos
+        $tags_validos = [];
+        foreach ($_SESSION['reg_tags'] as $id_tag)
+        {
+            $stmt = $mysqli->prepare('SELECT id_tag FROM tags WHERE id_tag = ? LIMIT 1;');
+            $stmt->bind_param('i', $id_tag);
+            $stmt->execute();
+            $resultados = $stmt->get_result();
+            if ($resultados->num_rows > 0)
+            {
+                $tags_validos[] = $id_tag; // solo agregar si es valido
+            }
+        }
+        $_SESSION['reg_tags'] = $tags_validos;
+
+        // verificar que la orientacion y lo que busca sean opciones validas
+        $opciones_orientacion = ['1', '2', '3', '4'];
+        if (!in_array($_SESSION['reg_orientacion'], $opciones_orientacion))
+        {
+            $url_destino = '?register2';
+            $_SESSION['message_register2'] = 'Orientación inválida.';
+        }
+        $opciones_busco = ['60', '61', '62', '63'];
+        if (!in_array($_SESSION['reg_busco'], $opciones_busco))
+        {
+            $url_destino = '?register2';
+            $_SESSION['message_register2'] = 'Opción inválida en "Busco".';
+        }
+
+        unset($_SESSION['message_register2']);
     }
 
     if (isset($_POST['registro_pag3']))
@@ -262,6 +393,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             }
         }
 
+
     }
     
     if (isset($_POST['registro_pag3'])) {
@@ -278,6 +410,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
                 $_SESSION['upload_error'] = 'Error de subida en foto ' . ($i + 1) . '. Código: ' . $galeria_data['error'][$i];
             }
         }
+    }
+
+    if (isset($_POST['siguiente_persona']))
+    {
+        $url_destino = '?feed';
+        $_SESSION['i'] += 1;
     }
 
     header("Location: " . $url_destino , true, 303); // redirect por get

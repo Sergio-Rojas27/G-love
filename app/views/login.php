@@ -14,6 +14,7 @@
             <input required type="password" id="password" name="password" class="form-input" placeholder="Contraseña" style="color: white; padding-left: 1rem;">
             <i class='bx'><img id="ojo" src="media/ojoA.png" alt=""></i>
         </div>
+        <!--
         <div class="buttons-container-center" style="margin-top: 2rem; gap: 1rem;">
             <a href="login.php"><button class="gradiente-blanco">
                 <img src="media/google.svg" alt="" style="width: 5rem; height: 2rem;">
@@ -22,7 +23,7 @@
                 <img src="media/facebook.svg" alt="" style="width: 6rem; height: 2rem;">
             </button></a>
         </div>
-
+        -->
         <div class="buttons-container-center" style="margin-top: 7%;">
             <button class="gradiente-verde" name="enter_login">Ingresar</button>
         </div>
