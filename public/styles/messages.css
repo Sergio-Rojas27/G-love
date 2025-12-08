@@ -132,6 +132,11 @@
     border-radius: 14px;
 }
 
+.back-btn:hover {
+  background: var(--gradiente-morado-contraste);
+  box-shadow: 0 0 15px 2px #5D00E8;
+}
+
 .sendMessage-container {
     position: fixed; /* Esto lo hace "sticky" */
     bottom: 5rem;

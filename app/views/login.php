@@ -28,7 +28,7 @@
             <button class="gradiente-verde" name="enter_login">Ingresar</button>
         </div>
         
-        <p class="texto-general" style="text-align: center; margin-top: 4rem; margin-bottom: 0%;">¿Olvidaste tu contraseña?</p>
+      <!--  <p class="texto-general" style="text-align: center; margin-top: 4rem; margin-bottom: 0%;">¿Olvidaste tu contraseña?</p> -->
     </form>
 </div>
 

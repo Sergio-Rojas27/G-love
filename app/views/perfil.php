@@ -35,15 +35,15 @@
     </div>
 
     <div class="container-center">
-        <div class="btns-perfil">
+        <a href="index.php?perfil" class="btns-perfil">
             <p class="texto-general">Fotos</p>
-        </div>
-        <div class="btns-perfil">
+        </a>
+        <a href="index.php?perfil2" class="btns-perfil">
             <p class="texto-general">Información</p>
-        </div>
-        <div class="btns-perfil">
+        </a>
+        <a href="index.php?perfil3" class="btns-perfil">
             <p class="texto-general">Estadísticas</p>
-        </div>
+        </a>
     </div>
 
     <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Fotos</p>
