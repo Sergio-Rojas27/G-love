@@ -75,15 +75,40 @@
             <input type="text" class="form-input" placeholder="Buscar Juegos">
             <i class='icono'><img id="search1" src="media/search.png" alt=""></i>
         </div>
+            <div class="container-scroll-y">
+            <?php 
+                $stmt = $mysqli->prepare('SELECT id_game, game_name FROM games;');
+                $stmt->execute();
+                $resultados = $stmt->get_result();
+            ?>
+            <?php while($fila = $resultados->fetch_assoc()): ?>
+                <div class="container-item-scroll">
+                    <input type="checkbox" name="games[]" value="<?php echo $fila['id_game']; ?>">
+                    <p class="texto-general" style="text-align: left;"><?php echo $fila['game_name']; ?></p>
+                </div>
+            <?php endwhile ?>
+        </div>
 
-        <div class="register-container">
+        <div class="register-container" style="margin-top: 2rem;">
             <input type="text" class="form-input" placeholder="Buscar Juegos">
             <i class='icono'><img id="search1" src="media/search.png" alt=""></i>
+        </div>
+        <div class="container-scroll-y">
+            <?php 
+                $stmt = $mysqli->prepare('SELECT id_tag, tag FROM tags;');
+                $stmt->execute();
+                $resultados = $stmt->get_result();
+            ?>
+            <?php while($fila = $resultados->fetch_assoc()): ?>
+                <div class="container-item-scroll">
+                    <input type="checkbox" name="tags[]" value="<?php echo $fila['id_tag']; ?>">
+                    <p class="texto-general"><?php echo $fila['tag']; ?></p>
+                </div>
+            <?php endwhile ?>
         </div>
     </div>
 
     <div class="button-container">
-        <button class="gradiente-morado button-fake" id="editar-perfil">Editar Perfil</button>
         <button class="gradiente-morado button-fake" id="guardar-perfil">Editar Perfil</button>
     </div> 
 
