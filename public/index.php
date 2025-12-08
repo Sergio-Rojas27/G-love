@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada; // como sea que la haya llamado sergio
     }
+    if(isset($_GET['messaging']))
+    {
+        $pagina_solicitada = 'messaging';
+    }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
 }
@@ -82,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $contrasena = htmlspecialchars($_POST['password']) ?? null;
         
         // logica para corrocoquear base de datos
-        $stmt = $mysqli->prepare('SELECT email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
+        $stmt = $mysqli->prepare('SELECT id_user, email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
         $stmt->bind_param('ss', $contrasena, $usuario_correo);
         $stmt->execute();
         $resultados = $stmt->get_result();
@@ -100,7 +104,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             unset($_SESSION['message_login']);
         }
     }
+    if(isset($_POST['send_message'])){
+        require_once '../app/controllers/messages.php';
+        $messagesController = new MessagesController();
+        $usuario_chat = intval($_POST['usuario_id']);
+        $usuario_actual = intval($_POST['usuario_actual']);
 
+        $mensaje = trim($_POST['message']);
+        $messagesController->sendMessage($usuario_actual, $usuario_chat, $mensaje);
+        $url_destino = '?messaging&id_chat=' . $usuario_chat;
+        $vista = $dir_vistas . 'messaging' . '.php';
+    }
     if (isset($_POST['registro_pag1']))
     {
         $_SESSION['reg_nombre'] = htmlspecialchars($_POST['nombre']) ?? null;
