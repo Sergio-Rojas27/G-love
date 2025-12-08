@@ -27,9 +27,11 @@
             <p class="Subtitulos" id="NombrePerfil"><?php echo htmlspecialchars($user['first_name']);?></p>
             <p class="Subtitulos-gris"><?php echo htmlspecialchars($user['username']);?></p>
         </div>
+        <!--
         <div class="compartir">
             <img src="media/share.svg" alt="">
         </div>
+        -->
     </div>
 
     <div class="container-center">
@@ -40,7 +42,7 @@
             <p class="texto-general">Información</p>
         </div>
         <div class="btns-perfil">
-            <p class="texto-general">Metas</p>
+            <p class="texto-general">Estadísticas</p>
         </div>
     </div>
 

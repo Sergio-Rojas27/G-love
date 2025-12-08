@@ -9,9 +9,11 @@
             <p class="Subtitulos" id="NombrePerfil">Nombre del tipo</p>
             <p class="Subtitulos-gris">Nickname del tipo</p>
         </div>
+        <!--
         <div class="compartir">
             <img src="media/share.svg" alt="">
         </div>
+        -->
     </div>
 
     <div class="container-center">
@@ -22,7 +24,7 @@
             <p class="texto-general">Información</p>
         </div>
         <div class="btns-perfil">
-            <p class="texto-general">Metas</p>
+            <p class="texto-general">Estadísticas</p>
         </div>
     </div>
 
