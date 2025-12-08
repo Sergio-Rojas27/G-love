@@ -280,8 +280,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <?php echo $_SESSION['reg_fotos_galeria'] ?? ' -.- '?>
-    <?php echo $_SESSION['reg_avatar'] ?? ' -.- '?>
     <?php include_once $vista ?>
 </body>
 </html>
