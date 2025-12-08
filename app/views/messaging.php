@@ -48,9 +48,11 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
         <img src="<?php echo($interacciones_controller->getProfilePic($usuario_chat) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($usuario_chat): '../app/user_pictures/default.png')?>" alt="Foto de Perfil no valida" class="avatar">
         <div class="username Subtitulos"><?php echo $username['username']?></div>
     </div>
-    <button class="info-btn" onCliclk="alert('Información del usuario')">
-    <img src="../public/media/info.png" alt="Info" style="width: 1.4rem; height: 1.4rem;">
-  </button>
+    <a href="index.php?perfil&verPerfil=<?php echo $usuario_chat?>">
+        <button class="info-btn">
+        <img src="../public/media/info.png" alt="Info" style="width: 1.4rem; height: 1.4rem;">
+      </button>
+    </a>
 </div>
 <!-- INICIO DEL CHAT -->
 <div class="chat-container">
