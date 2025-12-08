@@ -1,17 +1,23 @@
 /* COLORES Y GRADIENTES */
-
+:root{
+    --gradiente-morado: linear-gradient(to bottom, #6200ea, #30009c);
+    --gradiente-verde: linear-gradient(to bottom, #00c090, #009570);
+    --gradiente-azul: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
+    --gradiente-blanco: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
+    --gradiente-gris: linear-gradient(180deg, #5C467E 100%, #36294A 100%);
+}
 .gradiente-morado {
-    background: linear-gradient(to bottom, #6200ea, #30009c);
+    background: var(--gradiente-morado);
 }
 
 .gradiente-verde {
-    background: linear-gradient(to bottom, #00c090, #009570);
+    background: var(--gradiente-verde);
 }
 
 .gradiente-azul{
-    background: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
+    background: var(--gradiente-azul);
 }
 
 .gradiente-blanco{
-    background: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
+    background: var(--gradiente-blanco);
 }

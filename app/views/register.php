@@ -16,27 +16,33 @@
             <i class='bx1'><img id="ojo1" src="media/ojoA.png" alt=""></i>
         </div>
         <select required name="sexo" id="sexo" class="form-input">
-            <option value="" selected disabled hidden>Sexo</option>
-            <option value="masculino">Masculino</option>
-            <option value="femenino">Femenino</option>
-            <option value="otro">Otro</option>
-            <option value="ninguno">Prefiero no decirlo</option>
+            <option value="" selected disabled hidden>Género</option>
+            <option value="1">Hombre</option>
+            <option value="2">Mujer</option>
+            <option value="3">Otro</option>
+            <option value="4">Prefiero no decirlo</option>
         </select>
         <section id='container-nacimiento' style="margin-top: 5%">
             <span class="texto-general">Nacimiento: </span>
             <input required type="date" name="nacimiento" id="nacimiento">
         </section>
+        <!--
         <div class="file-container">
             <label for="cedula">
                 <input required type="file" class="upload-button-styled" name="cedula" id="cedula" accept="image/*" required>
                 <img src="media/Btn-Upload.png" alt="">
             </label>
             <span id="file-name-display" class="file-name">Ningún archivo seleccionado.</span>
+        </div> -->
+        <input type="number" name="cedula" id="cedula" class="form-input" placeholder="Número de Identificación">
         </div>
         
-        </div>
-        <!-- UY PAPA MIGUEL NO TENGO NI PUTA IDEA DE COMO HACER LO DE LA CI Y LAS IMAGENES, BUENA SUERTE -->
     </div>
+
+    <?php if (isset($_SESSION['message_register'])): ?>
+        <p id="" class="texto-general" style="text-align: center; margin: 2rem;"><?php echo $_SESSION['message_register'] ?></p>
+    <?php endif ?>
+
     <section class="checkbox-container">
         <div class="container">
             <input required type="checkbox" id="terminos" name="terminos" value="si">
@@ -50,9 +56,9 @@
     
     <div class="buttons-container">
         <a href="?home"><button formnovalidate class="gradiente-morado">Atrás</button></a>
-
-        <a href="?register2"><button type="submit" name="registro_pag1" class="gradiente-verde">Siguiente</button></a>
+        <button type="submit" name="registro_pag1" class="gradiente-verde">Siguiente</button>
     </div> 
+
 </div> 
 </form>
 

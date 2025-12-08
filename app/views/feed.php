@@ -40,7 +40,7 @@
     </div>
     <section class="container">
         <div class="container">
-            <input required type="checkbox" id="mund" name="mund" value="si">
+            <input required type="checkbox" id="mund" name="mundo" value="si">
             <p class="texto-general">Todo el Mundo</p>
         </div>
     </section>
