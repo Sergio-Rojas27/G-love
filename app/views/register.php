@@ -22,10 +22,10 @@
             <option value="3">Otro</option>
             <option value="4">Prefiero no decirlo</option>
         </select>
-        <section id='container-nacimiento' style="margin-top: 5%">
+        <div class="container-center" style="margin-top: 0;">
             <span class="texto-general">Nacimiento: </span>
             <input required type="date" name="nacimiento" id="nacimiento">
-        </section>
+        </div>
         <!--
         <div class="file-container">
             <label for="cedula">

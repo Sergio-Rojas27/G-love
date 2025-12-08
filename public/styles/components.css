@@ -119,12 +119,29 @@ input[type="file"] {
 .img-perfil{
     width: 6.5rem;
     height: 6.5rem;
-    border-radius: 1rem;
+    border-radius: 14px;
+    background: linear-gradient(#5D00E8 0%, #2D0084 100%);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ffffff7e;
+    box-sizing: border-box;
 }
 
 .img-general{
-    width: 5.625rem;
-    height: 5.625rem;
+    width: 5rem;
+    height: 5rem;
+    border-radius: 14px;
+    background: linear-gradient(#5C467E 0%, #36294A 100%);
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
+    padding: 0;
+    margin: 8px;
+    border: 1px solid #ffffff7e;
+    box-sizing: border-box;
 }
 
 input[type="checkbox"] {
@@ -137,13 +154,13 @@ input[type="checkbox"] {
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 }
 
 input[type="checkbox"]::after {
     font-family: 'open-sans', sans-serif;
-    font-weight: 900;
-    content: '✓';
+    font-weight: 1600;
+    content: url('../media/check.svg');
     color: white;
     display: none;
 }

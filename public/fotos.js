@@ -148,8 +148,8 @@ file8.addEventListener('change', e => {
     }
 });
 // Imagen 9
-const file9 = document.getElementById('im1');
-const img9 = document.getElementById('img1');
+const file9 = document.getElementById('im9');
+const img9 = document.getElementById('img9');
 
 file9.addEventListener('change', e => {
     if( e.target.files[0] ){
