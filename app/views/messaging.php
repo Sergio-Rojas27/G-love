@@ -2,6 +2,8 @@
 // Logica para recibir que usuario esta hablando con que usuario
 require_once __DIR__ . '../../controllers/messages.php';
 $messagesController = new MessagesController();
+require_once __DIR__ . '../../controllers/interacciones.php';
+$interacciones_controller = new InteraccionesController();
 $usuario_actual = $_SESSION['usuario_id']; 
 if (isset($_GET['id_chat'])) {
     $usuario_chat = intval($_GET['id_chat']);
@@ -43,7 +45,7 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
             <button class="back-btn" onclick="window.location.href='?chats'">
             <img src="../public/media/back.png" alt="Foto de Perfil no valida" style="width: 2.5rem; height: 2.5rem;">
         </button>
-        <img src="#" alt="Foto de Perfil no valida" class="avatar">
+        <img src="<?php echo($interacciones_controller->getProfilePic($usuario_chat) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($usuario_chat): '../app/user_pictures/default.png')?>" alt="Foto de Perfil no valida" class="avatar">
         <div class="username"><?php echo $username['username']?></div>
     </div>
     <button class="info-btn" onCliclk="alert('Información del usuario')">
