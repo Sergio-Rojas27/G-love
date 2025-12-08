@@ -47,3 +47,7 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
 
         </form>
 </div>
+<?php 
+    $pagina = '0';
+    require_once __DIR__ . '../../templates/footer.php';
+?>

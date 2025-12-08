@@ -17,6 +17,12 @@
         </div>
     </form>
 </div>
+
+<?php 
+    $pagina = '3';
+    require_once __DIR__ . '../../templates/footer.php';
+?>
+
 <div class="chats-list-container">
     <!-- LISTA DE CHATS -->
         <?php foreach($chats as $chat){ 

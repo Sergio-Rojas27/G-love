@@ -47,6 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada = 'chats';
     }
+    if (isset($_GET['perfil']))
+    {
+        $pagina_solicitada = 'perfil';
+    }
+    if (isset($_GET['perfil2']))
+    {
+        $pagina_solicitada = 'perfil2';
+    }
+    if (isset($_GET['perfil3']))
+    {
+        $pagina_solicitada = 'perfil3';
+    }
     if (isset($_GET['interacciones']))
     {
         $pagina_solicitada = 'interacciones';

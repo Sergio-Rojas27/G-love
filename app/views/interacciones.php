@@ -118,3 +118,7 @@
         ?>
         
     <?php } ?>
+<?php 
+    $pagina = '3';
+    require_once __DIR__ . '../../templates/footer.php';
+?>
