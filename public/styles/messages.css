@@ -5,7 +5,7 @@
     align-items: center;
 }
 .notification-card {
-    background: linear-gradient(90deg, #6c528f 0%, #3e206a 100%);
+    background: linear-gradient(180deg, #6c528f 0%, #3e206a 100%);
     width: 80%;
     padding: 5%;
     border-radius: 1rem; /* Bordes muy redondeados */
@@ -70,7 +70,7 @@
 
 .sended-message{
     text-align: right; 
-    background: linear-gradient(0deg, #5D00E8 100%, #2D0084 0%);
+    background: linear-gradient(0deg, #2D0084 0%, #5D00E8 100%);
     margin: 0% 5% 0% 5%;
     padding: 3%;
     padding-bottom: 5%;
@@ -84,7 +84,7 @@
 
 .recived-message{
     text-align: left; 
-    background: linear-gradient(0deg, #56467E 100%, #36294A 0%);
+    background: linear-gradient(0deg, #36294A 0%, #56467E 100%);
     color:white;
     margin: 0% 5% 0% 5%;
     padding: 3%;
@@ -121,12 +121,15 @@
     margin-left: 5%;
     padding: 0;
     background: transparent;
-    width: 1rem;
-    height: 1rem;
+    width: 3.125rem;
+    height: 3.125rem;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+
+    background: linear-gradient(80deg, #2D0084 0%, #5D00E8 100%);
+    border-radius: 14px;
 }
 
 .sendMessage-container {

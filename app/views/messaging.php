@@ -40,7 +40,7 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
 <!-- TARJETA DE USUARIO -->
 <div class="header">
     <div class="container">
-        <button class="back-btn" onclick="window.location.href='?chats'">
+            <button class="back-btn" onclick="window.location.href='?chats'">
             <img src="../public/media/back.png" alt="Foto de Perfil no valida" style="width: 2.5rem; height: 2.5rem;">
         </button>
         <img src="#" alt="Foto de Perfil no valida" class="avatar">
