@@ -1,7 +1,7 @@
 <?php 
     // LOGICA PARA RECIBIR QUE USUARIO ESTA HABLANDO CON QUE USUARIO
     // PERDON PERO NO ME ACUERDO COMO OBTENER EL USUARIO EN SESSION[]
-    $usuario_actual = 9; // ESTO DEBERIA VENIR DE LA SESSION
+    $usuario_actual = $_SESSION['usuario_id']; // ESTO DEBERIA VENIR DE LA SESSION
     require_once __DIR__ . '../../controllers/messages.php';
     $chat_controller = new MessagesController();
     $chats = $chat_controller->getChats($usuario_actual);
@@ -13,7 +13,7 @@
     <form action="" method="POST" styyle="width: 100%; display: flex; justify-content: center;">
         <div class="chats-container">
             <input required type="text" id="search" name="search" class="search-input" placeholder="Buscar">
-            <i class='bx'><img id="ojo" src="media/ojoA.png" alt=""></i>
+            <i class='bx'><img id="ojo" src="media/search.png" alt=""></i>
         </div>
     </form>
 </div>
@@ -29,7 +29,8 @@
             $hora_db = new DateTime($chat['fecha_hora']);
             ?>
         <!-- Un Chat -->
-        <div class="notification-card">
+         <a href="index.php?messaging&id_chat=<?php echo $chat['contacto_id']; ?>" style="margin: 0; padding: 0; width: 100%; ">
+        <div class="notification-card" style="margin-left: 5%;">
             <img src="https://i.pinimg.com/736x/89/66/af/8966af4dfa228308488001646271a742.jpg" alt="Foto de perfil" class="avatar">
             <div class="content">
                 <div class="username"><?php echo htmlspecialchars($chat['usernameChat'])  ?></div>
@@ -37,6 +38,7 @@
                 <span class="timestamp"><?php echo htmlspecialchars($hora_db->format('h:i A'))?></span>
             </div>
         </div>
-        <?php } ?>
+        </a>
+    <?php } ?>
 </div>
 <!-- Hay que hacer el navbar que va en el footer e incluirlo aca -->

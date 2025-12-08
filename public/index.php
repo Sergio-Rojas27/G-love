@@ -67,6 +67,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     {
         $pagina_solicitada; // como sea que la haya llamado sergio
     }
+    if(isset($_GET['messaging']))
+    {
+        $pagina_solicitada = 'messaging';
+    }
     
     $vista = $dir_vistas . $pagina_solicitada . '.php';
 }
@@ -100,7 +104,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             unset($_SESSION['message_login']);
         }
     }
+    if(isset($_POST['send_message'])){
+        require_once '../app/controllers/messages.php';
+        $messagesController = new MessagesController();
+        $usuario_chat = intval($_POST['usuario_id']);
+        $usuario_actual = intval($_POST['usuario_actual']);
 
+        $mensaje = trim($_POST['message']);
+        $messagesController->sendMessage($usuario_actual, $usuario_chat, $mensaje);
+        $url_destino = '?messaging&id_chat=' . $usuario_chat;
+        $vista = $dir_vistas . 'messaging' . '.php';
+    }
     if (isset($_POST['registro_pag1']))
     {
         unset($_SESSION['message_register']);
