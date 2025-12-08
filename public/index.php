@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $contrasena = htmlspecialchars($_POST['password']) ?? null;
         
         // logica para corrocoquear base de datos
-        $stmt = $mysqli->prepare('SELECT email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
+        $stmt = $mysqli->prepare('SELECT id_user, email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
         $stmt->bind_param('ss', $contrasena, $usuario_correo);
         $stmt->execute();
         $resultados = $stmt->get_result();
@@ -91,6 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     if (isset($_POST['registro_pag1']))
     {
+        unset($_SESSION['message_register']);
+
         $_SESSION['reg_nombre'] = htmlspecialchars($_POST['nombre']) ?? null;
         $_SESSION['reg_apellido'] = htmlspecialchars($_POST['apellido']) ?? null;
         $_SESSION['reg_correo'] = htmlspecialchars($_POST['correo']) ?? null;
@@ -125,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $_SESSION['reg_ubicacion'] = htmlspecialchars($_POST['ubicacion']) ?? null;
         $_SESSION['reg_distancia'] = htmlspecialchars($_POST['distancia']) ?? null;
         $_SESSION['reg_mundo'] = htmlspecialchars($_POST['mundo']) ?? null;
-        $_SESSION['reg_juegos'] = $_POST['juegos'] ?? null;
+        $_SESSION['reg_juegos'] = $_POST['games'] ?? null;
         $_SESSION['reg_tags'] = $_POST['tags'] ?? null;
     }
 
@@ -135,8 +137,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
         $_SESSION['reg_nickname'] = htmlspecialchars($_POST['nickname']) ?? null;        
         // logica para subir imagenes
-        $_SESSION['reg_avatar'] = $_FILES['avatar'] ?? null;
-        $_SESSION['reg_fotos_galeria'] = $_FILES['fotos'] ?? null;
 
         $verified = 0;
         //subir toda la informacion de las 3 paginas de registro a la base de datos
@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $stmt->execute();
         }
 
-        $stmt = $mysqli->prepare('INSERT INTO users_tags(id_user, id_tag) VALUES (?, (SELECT id_tag FROM tags WHERE id_tag = ?));');
+        $stmt = $mysqli->prepare('INSERT INTO users_tags(id_user, id_tag) VALUES (?, ?);');
         foreach ($_SESSION['reg_tags'] as $id_tag)
         {
             $stmt->bind_param('ii', $id_user_nuevo, $id_tag);
@@ -181,7 +181,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             mkdir($ubicacion_fotos, 0777, true); 
         }
 
-        $avatar = $_SESSION['reg_avatar'];
+        $avatar = $_FILES['avatar'];
 
         $tipo_archivo = $avatar['type'];
         $tamano_archivo = $avatar['size'];
@@ -198,43 +198,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             $ruta_destino_avatar = $ubicacion_fotos . $nombre_avatar;
 
             // Mover el archivo
-            if (move_uploaded_file($avatar_data['tmp_name'], $ruta_destino_avatar)) 
+            if (move_uploaded_file($avatar['tmp_name'], $ruta_destino_avatar)) 
             {
-                // Actualizar la DB con la ruta del avatar
-                $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, is_profile) VALUES (?, ?, 1);');
-                $stmt->bind_param('is', $id_user_nuevo, $ruta_destino_avatar);
+                // Actualizar la DB con el NOMBRE del archivo
+                $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, isProfile) VALUES (?, ?, 1);');
+                $stmt->bind_param('is', $id_user_nuevo, $nombre_avatar); // <--- Usamos $nombre_avatar
                 $stmt->execute();
             }
         }
 
-        foreach ($_SESSION['reg_fotos_galeria'] as $foto)
+        $galeria_data = $_FILES['fotos'];
+        $cantidad_fotos = count($galeria_data['name'] ?? []);
+
+        for ($i = 0; $i < $cantidad_fotos; $i++)
         {
 
-            if (!is_dir($ubicacion_fotos)) 
+            // Verificamos si hubo un error y si el slot no está vacío
+            if ($galeria_data['error'][$i] === UPLOAD_ERR_OK && !empty($galeria_data['tmp_name'][$i])) 
             {
-                mkdir($ubicacion_fotos, 0777, true); 
-            }
-
-            $tipo_archivo = $foto['type'];
-            $tamano_archivo = $foto['size'];
-
-            // Validar el Avatar
-            if ($foto && $foto['error'] == UPLOAD_ERR_OK) 
-            {
+                // 1. Obtener los datos del archivo actual usando el índice $i
+                $nombre_temporal = $galeria_data['tmp_name'][$i];
+                $nombre_original = $galeria_data['name'][$i];
                 
-                // Obtener la extensión original para guardarla
-                $extension = pathinfo($foto['name'], PATHINFO_EXTENSION);
-                
-                // Generar un nombre único para el avatar usando el ID del usuario
-                $nombre_foto = $id_user_nuevo . uniqid() . '.' . $extension;
+                // 2. Generar nombre único
+                $extension = pathinfo($nombre_original, PATHINFO_EXTENSION);
+                $nombre_foto = $id_user_nuevo . '_galeria_' . uniqid() . '.' . $extension;
                 $ruta_destino_foto = $ubicacion_fotos . $nombre_foto;
 
-                // Mover el archivo
-                if (move_uploaded_file($avatar_foto['tmp_name'], $ruta_destino_foto)) 
+                // 3. Mover el archivo
+                if (move_uploaded_file($nombre_temporal, $ruta_destino_foto)) 
                 {
-                    // Actualizar la DB con la ruta del avatar
-                    $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, is_profile) VALUES (?, ?, 1);');
-                    $stmt->bind_param('is', $id_user_nuevo, $ruta_destino_avatar);
+                    // CORRECCIÓN 3: Insertamos el nombre del archivo ($nombre_foto) y establecemos is_profile = 0
+                    $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, isProfile) VALUES (?, ?, 0);'); // 0 = Galería
+                    $stmt->bind_param('is', $id_user_nuevo, $nombre_foto); // <--- CORREGIDO!
                     $stmt->execute();
                 }
             }
@@ -242,6 +238,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
     }
     
+    if (isset($_POST['registro_pag3'])) {
+        if ($_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
+            // Muestra el código de error para el Avatar
+            $_SESSION['upload_error'] = 'Error de subida de Avatar. Código: ' . $_FILES['avatar']['error'];
+        }
+
+        $galeria_data = $_FILES['fotos'];
+        $cantidad_fotos = count($galeria_data['name'] ?? []);
+        for ($i = 0; $i < $cantidad_fotos; $i++) {
+            if ($galeria_data['error'][$i] !== UPLOAD_ERR_OK && $galeria_data['error'][$i] !== UPLOAD_ERR_NO_FILE) {
+                // Muestra el código de error para la Galería
+                $_SESSION['upload_error'] = 'Error de subida en foto ' . ($i + 1) . '. Código: ' . $galeria_data['error'][$i];
+            }
+        }
+    }
+
     header("Location: " . $url_destino , true, 303); // redirect por get
     exit;
 }
@@ -256,6 +268,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
+    <?php echo $_SESSION['reg_fotos_galeria'] ?? ' -.- '?>
+    <?php echo $_SESSION['reg_avatar'] ?? ' -.- '?>
     <?php include_once $vista ?>
 </body>
 </html>
