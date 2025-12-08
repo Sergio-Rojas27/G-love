@@ -2,7 +2,7 @@
     $titulo_header = 'Registro';
     require_once __DIR__ . '../../templates/header.php';
 ?>
-<form action="" method="POST" class="form-todo">
+<form action="" method="POST" class="form-todo" enctype="multipart/form-data">
     <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Últimos detalles</p>
     <div class="container-form">
         <label for="avatar">
