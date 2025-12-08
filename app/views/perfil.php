@@ -131,6 +131,10 @@
     <?php if (!$viendo): ?>
         <button type="submit" class="gradiente-verde" name="guardar_fotos" style="margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Guardar Cambios</button>
     <?php endif; ?>
+
+    <?php if (!$viendo): ?>
+        <button type="submit" name="cerrar_sesion" style="background: var(--gradiente-rojo); margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Cerrar sesión</button>
+    <?php endif; ?>
 </form>
 
 <?php 
