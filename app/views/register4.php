@@ -7,7 +7,7 @@
     <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Registro exitoso!</p>
     
     <div style="display: flex; justify-content: center; margin-top: 2rem;">
-        <a href="index.php?feed"><button class="gradiente-verde">Ir al feed</button></a>
+        <button class="gradiente-verde" name="ir_al_feed">Ir al feed</button>
     </div>
 
     <div style="margin-top: 16rem;"></div>

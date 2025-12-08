@@ -7,6 +7,53 @@ $titulo = 'Game Lovers';
 $dir_vistas = '../app/views/';
 $vista;
 
+function guardar_foto($nombre_archivo)
+{
+    $ubicacion_fotos = '../app/user_pictures/';
+
+    // Validaciones de seguridad
+    $permitidos = array("image/jpg", "image/jpeg", "image/png");
+    $limite_kb = 2000; // 2MB
+
+    // verificar que el directorio existe y tiene los permisos
+    if (!is_dir($ubicacion_fotos)) 
+    {
+        mkdir($ubicacion_fotos, 0777, true); 
+    }
+
+    $tipo_archivo = $nombre_archivo['type'];
+    $tamano_archivo = $nombre_archivo['size'];
+
+    // Validar el archivo
+    if (in_array($tipo_archivo, $permitidos) && $tamano_archivo <= $limite_kb * 1024) 
+    {
+        // Obtener la extensión original para guardarla
+        $extension = pathinfo($nombre_archivo['name'], PATHINFO_EXTENSION);
+        
+        // Generar un nombre único para el archivo usando el ID del usuario
+        $nombre_unico = $_SESSION['usuario_id'] . uniqid() . '.' . $extension;
+        $ruta_destino = $ubicacion_fotos . $nombre_unico;
+
+        // Mover el archivo
+        if (move_uploaded_file($nombre_archivo['tmp_name'], $ruta_destino)) 
+        {
+            return $nombre_unico; // Retornar el nombre del archivo guardado
+        }
+    }
+    return null; // Retornar null si no se pudo guardar
+}
+
+function eliminar_foto($nombre_archivo)
+{
+    $ubicacion_fotos = '../app/user_pictures/';
+    $ruta_completa = $ubicacion_fotos . $nombre_archivo;
+
+    if (file_exists($ruta_completa)) 
+    {
+        unlink($ruta_completa); // Eliminar el archivo
+    }
+}
+
 // todos los GET llegan aqui para escoger que pagina renderizar
 if ($_SERVER['REQUEST_METHOD'] === 'GET') 
 {
@@ -52,13 +99,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
         // si la pagina 3 del registro no se ha completado, redirigir ahi
         if (!isset($_SESSION['reg_juegos'], $_SESSION['reg_tags']))
         {
-            // limpiar variables de sesion del registro
-            unset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad']);
-            unset($_SESSION['reg_orientacion'], $_SESSION['reg_busco'], $_SESSION['reg_ubicacion'], $_SESSION['reg_distancia'], $_SESSION['reg_mundo'], $_SESSION['reg_juegos'], $_SESSION['reg_tags']);
-            unset($_SESSION['reg_nickname']);
             header('Location: ?register3');
             exit();
         }
+
+        // limpiar variables de sesion del registro si el registro ya se completo
+        unset($_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_confirmacion'], $_SESSION['reg_sexo'], $_SESSION['reg_cedula'], $_SESSION['reg_nacimiento'], $_SESSION['reg_terminos'], $_SESSION['reg_privacidad']);
+        unset($_SESSION['reg_orientacion'], $_SESSION['reg_busco'], $_SESSION['reg_ubicacion'], $_SESSION['reg_distancia'], $_SESSION['reg_mundo'], $_SESSION['reg_juegos'], $_SESSION['reg_tags']);
+        unset($_SESSION['reg_nickname']);
+        unset($_FILES['avatar'], $_FILES['fotos']);
 
         $pagina_solicitada = 'register4';
     }
@@ -288,6 +337,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         unset($_SESSION['message_register2']);
     }
 
+    $id_user_nuevo = null;
     if (isset($_POST['registro_pag3']))
     {
         $url_destino = '?register4';
@@ -395,6 +445,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 
 
     }
+
+    if (isset($_POST['ir_al_feed']))
+    {
+        $_SESSION['usuario_id'] = $id_user_nuevo;
+        $url_destino = '?feed';
+    }
     
     if (isset($_POST['registro_pag3'])) {
         if ($_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
@@ -436,13 +492,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
     if (isset($_POST['guardar_fotos'])) 
     {
         $url_destino = '?perfil';
+
+        // eliminar las fotos antiguas del servidor
+        $stmt = $mysqli->prepare('SELECT photo_route FROM users_photos WHERE id_user = ?;');
+        $stmt->bind_param('i', $_SESSION['usuario_id']);
+        $stmt->execute();
+        $resultados = $stmt->get_result();
+        while ($fila = $resultados->fetch_assoc()) 
+        {
+            eliminar_foto($fila['photo_route']);
+        }
+
         // eliminar las fotos asociadas al usuario en la bdd
         $stmt = $mysqli->prepare('DELETE FROM users_photos WHERE id_user = ?;');
         $stmt->bind_param('i', $_SESSION['usuario_id']);
         $stmt->execute();
 
-        // eliminar esas fotos del servidor
+        // agregar las fotos nuevas
+        $avatar = $_FILES['avatar'];
+        $nombre_avatar = guardar_foto($avatar);
+        if ($nombre_avatar) 
+        {
+            // Insertar en la base de datos
+            $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, isProfile) VALUES (?, ?, 1);');
+            $stmt->bind_param('is', $_SESSION['usuario_id'], $nombre_avatar);
+            $stmt->execute();
+        }
+        
+        $galeria_data = $_FILES['fotos'];
+        $cantidad_fotos = count($galeria_data['name'] ?? []);
 
+        for ($i = 0; $i < $cantidad_fotos; $i++) 
+        {
+            if ($galeria_data['error'][$i] === UPLOAD_ERR_OK) 
+            {
+                
+                $archivo_galeria_individual = array(
+                    'name' => $galeria_data['name'][$i],
+                    'type' => $galeria_data['type'][$i],
+                    'tmp_name' => $galeria_data['tmp_name'][$i],
+                    'error' => $galeria_data['error'][$i],
+                    'size' => $galeria_data['size'][$i]
+                );
+                
+                $nombre_foto = guardar_foto($archivo_galeria_individual); 
+                
+                if ($nombre_foto) 
+                {
+                    // Insertar en la base de datos
+                    $stmt = $mysqli->prepare('INSERT INTO users_photos (id_user, photo_route, isProfile) VALUES (?, ?, 0);');
+                    $stmt->bind_param('is', $_SESSION['usuario_id'], $nombre_foto);
+                    $stmt->execute();
+                }
+            }
+        }
     }
 
     header("Location: " . $url_destino , true, 303); // redirect por get

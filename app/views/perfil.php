@@ -20,9 +20,12 @@
     $photos = $interacciones_controller->getPictures($_SESSION['usuario_id']);
     $profile_photo = $interacciones_controller->getProfilePic($_SESSION['usuario_id']);
 ?>
-<form action="" method="POST" class="form-todo">
+<form action="" method="POST" class="form-todo" enctype="multipart/form-data">
     <div class="container-left">
-        <img src="<?php echo(($interacciones_controller->getProfilePic($_SESSION['usuario_id']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($_SESSION['usuario_id']): '../app/user_pictures/default.png')?>" alt=""  class="img-perfil-p">
+        <label for="avatar">
+            <input required type="file" class="img-perfil-p" name="avatar" id="avatar" accept="image/*" required>
+            <img src="<?php echo(($interacciones_controller->getProfilePic($_SESSION['usuario_id']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($_SESSION['usuario_id']): '../app/user_pictures/default.png')?>" alt="foto" id="foto-perfil" class="img-perfil">
+        </label>
         <div id="container-names">
             <p class="Subtitulos" id="NombrePerfil"><?php echo htmlspecialchars($user['first_name']);?></p>
             <p class="Subtitulos-gris"><?php echo htmlspecialchars($user['username']);?></p>
@@ -94,7 +97,7 @@
         </div>
     </div>
 
-    <button class="gradiente-verde" name="guardar_fotos" style="margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Guardar Cambios</button>
+    <button type="submit" class="gradiente-verde" name="guardar_fotos" style="margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Guardar Cambios</button>
 
 </form>
 
