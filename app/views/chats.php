@@ -12,7 +12,7 @@
 <div class="search-container">
     <form action="" method="POST" styyle="width: 100%; display: flex; justify-content: center;">
         <div class="chats-container">
-            <input required type="text" id="search" name="search" class="search-input" placeholder="Buscar">
+            <input required style="margin-bottom: 1.5rem; margin-top: 1.5rem;" type="text" id="search" name="search" class="search-input" placeholder="Buscar">
             <i class='bx'><img id="ojo" src="media/search.png" alt=""></i>
         </div>
     </form>
@@ -33,9 +33,9 @@
         <div class="notification-card" style="margin-left: 5%; margin-bottom: 5%;">
             <img src="https://i.pinimg.com/736x/89/66/af/8966af4dfa228308488001646271a742.jpg" alt="Foto de perfil" class="avatar">
             <div class="content">
-                <div class="username"><?php echo htmlspecialchars($chat['usernameChat'])  ?></div>
-                <p class="message"><?php echo htmlspecialchars($chat['ultimo_mensaje']) ?></p>
-                <span class="timestamp"><?php echo htmlspecialchars($hora_db->format('h:i A'))?></span>
+                <div class="username Subtitulos"><?php echo htmlspecialchars($chat['usernameChat'])  ?></div>
+                <p class="message texto-general"><?php echo htmlspecialchars($chat['ultimo_mensaje']) ?></p>
+                <span class="timestamp texto-general"><?php echo htmlspecialchars($hora_db->format('h:i A'))?></span>
             </div>
         </div>
         </a>

@@ -18,9 +18,9 @@
     
     <div class="right-content">
         <div class="info-bubble">
-            <div class="username"><?php echo htmlspecialchars($interaccion['username'])?></div>
-            <span class="timestamp"><?php echo htmlspecialchars($hora_db->format('h:i A'))?></span>
-                <div class="message">
+            <div class="username Subtitulos"><?php echo htmlspecialchars($interaccion['username'])?></div>
+            <span class="timestamp texto-general"><?php echo htmlspecialchars($hora_db->format('h:i A'))?></span>
+                <div class="message texto-general">
                     ¡Hicieron match! <span class="hearts">♡♡</span>
                 </div>
         </div>
