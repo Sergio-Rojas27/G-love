@@ -5,6 +5,7 @@
     --gradiente-azul: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
     --gradiente-blanco: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
     --gradiente-gris: linear-gradient(180deg, #5C467E 100%, #36294A 100%);
+    --gradiente-rojo: linear-gradient(to bottom, #FF0066, #8E0036);
 
     --gradiente-morado-contraste: linear-gradient(to bottom, #7800E8, #37006B);
     --gradiente-verde-contraste: linear-gradient(to bottom, #00D15E, #007836);

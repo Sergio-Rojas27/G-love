@@ -113,6 +113,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     if (isset($_GET['feed']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'feed';
     }
     if (isset($_GET['login']))
@@ -121,26 +126,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     if (isset($_GET['messaging']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'messaging';
     }
     if (isset($_GET['chats']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'chats';
     }
     if (isset($_GET['perfil']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'perfil';
     }
     if (isset($_GET['perfil2']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'perfil2';
     }
     if (isset($_GET['perfil3']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'perfil3';
     }
     if (isset($_GET['interacciones']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'interacciones';
     }
     if (isset($_GET['register2']))
@@ -149,6 +184,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET')
     }
     if(isset($_GET['messaging']))
     {
+        if (!isset($_SESSION['usuario_id'])) 
+        {
+            header('Location: ?login');
+            exit();
+        }
         $pagina_solicitada = 'messaging';
     }
     
@@ -166,8 +206,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $contrasena = htmlspecialchars($_POST['password']) ?? null;
         
         // logica para corrocoquear base de datos
-        $stmt = $mysqli->prepare('SELECT id_user, email, password FROM users WHERE password = ? and email = ? LIMIT 1;');
-        $stmt->bind_param('ss', $contrasena, $usuario_correo);
+        $stmt = $mysqli->prepare('SELECT id_user, email, password FROM users WHERE email = ? LIMIT 1;');
+        $stmt->bind_param('s', $usuario_correo);
         $stmt->execute();
         $resultados = $stmt->get_result();
         
@@ -179,6 +219,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         else
         {
             $fila = $resultados->fetch_assoc();
+            if (!password_verify($contrasena, $fila['password'])) 
+            {
+                $url_destino = '?login';
+                $_SESSION['message_login'] = 'Credenciales invalidas';
+            }
             $url_destino = '?feed';
             $_SESSION['usuario_id'] = $fila['id_user'];
             unset($_SESSION['message_login']);
@@ -349,7 +394,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         //subir toda la informacion de las 3 paginas de registro a la base de datos
         // register_pag1
         $stmt = $mysqli->prepare('INSERT INTO users (first_name, last_name, email, password, gender, birth, identification_number, verified, orientation, username) VALUES (?,?,?,?,?,?,?,?,?,?);');
-        $stmt->bind_param('ssssssssis', $_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'], $_SESSION['reg_contrasena'], $_SESSION['reg_sexo'], $_SESSION['reg_nacimiento'], $_SESSION['reg_cedula'], $verified, $_SESSION['reg_orientacion'], $_SESSION['reg_nickname']); // no verificado por defecto
+        $stmt->bind_param('ssssssssis', $_SESSION['reg_nombre'], $_SESSION['reg_apellido'], $_SESSION['reg_correo'],password_hash( $_SESSION['reg_contrasena'], PASSWORD_DEFAULT), $_SESSION['reg_sexo'], $_SESSION['reg_nacimiento'], $_SESSION['reg_cedula'], $verified, $_SESSION['reg_orientacion'], $_SESSION['reg_nickname']); // no verificado por defecto
         $stmt->execute();
 
         $id_user_nuevo = $mysqli->insert_id;
@@ -547,6 +592,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
             }
         }
     }
+
+    if (isset($_POST['cerrar_sesion'])) 
+    {
+        session_unset();
+        session_destroy();
+        $url_destino = '?home';
+    } 
 
     header("Location: " . $url_destino , true, 303); // redirect por get
     exit;

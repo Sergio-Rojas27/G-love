@@ -46,7 +46,7 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
             <img src="../public/media/back.png" alt="Foto de Perfil no valida" style="width: 2.5rem; height: 2.5rem;">
         </button>
         <img src="<?php echo($interacciones_controller->getProfilePic($usuario_chat) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($usuario_chat): '../app/user_pictures/default.png')?>" alt="Foto de Perfil no valida" class="avatar">
-        <div class="username"><?php echo $username['username']?></div>
+        <div class="username Subtitulos"><?php echo $username['username']?></div>
     </div>
     <button class="info-btn" onCliclk="alert('Información del usuario')">
     <img src="../public/media/info.png" alt="Info" style="width: 1.4rem; height: 1.4rem;">
@@ -59,9 +59,9 @@ $mensajes = $messagesController->getMessages($usuario_actual, $usuario_chat);
         $hora_db = new DateTime($row['send_on']);
 
         if($row['Sended']) {
-            echo "<div class='sended-message'>" . htmlspecialchars($row['message']) ."<span class='hour-span'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
+            echo "<div class='sended-message texto-general'>" . htmlspecialchars($row['message']) ."<span class='hour-span texto-general'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
         } else {
-            echo "<div class='recived-message'>" . htmlspecialchars($row['message']) . "<span class='hour-span'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
+            echo "<div class='recived-message texto-general'>" . htmlspecialchars($row['message']) . "<span class='hour-span texto-general'> ".htmlspecialchars($hora_db->format('h:i A')) ."</span></div><br>";
         }
     }
 ?>

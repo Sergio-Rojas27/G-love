@@ -19,11 +19,13 @@
     $interacciones_controller = new InteraccionesController();
     $photos = $interacciones_controller->getPictures($_SESSION['usuario_id']);
     $profile_photo = $interacciones_controller->getProfilePic($_SESSION['usuario_id']);
+
+    // $fotos_cambiada = [];
 ?>
 <form action="" method="POST" class="form-todo" enctype="multipart/form-data">
     <div class="container-left">
         <label for="avatar">
-            <input required type="file" class="img-perfil-p" name="avatar" id="avatar" accept="image/*" required>
+            <input type="file" class="img-perfil-p" name="avatar" id="avatar" accept="image/*">
             <img src="<?php echo(($interacciones_controller->getProfilePic($_SESSION['usuario_id']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($_SESSION['usuario_id']): '../app/user_pictures/default.png')?>" alt="foto" id="foto-perfil" class="img-perfil">
         </label>
         <div id="container-names">
@@ -54,11 +56,11 @@
     <div class="container-form" style="padding-left: 0;">
                 <div class="container-img">
             <label for="im1">
-                <input required type="file" class="upload-button-styled" name="fotos[]" id="im1" accept="image/*" required>
+                <input type="file" class="upload-button-styled" name="fotos[]" id="im1" accept="image/*">
                 <img src="<?php echo((sizeof($photos) >= 1) ? '../app/user_pictures/'.$photos[0]['photo_route']: 'media/NewImg.svg')?>"  alt="foto" id="img1" class="img-general">
             </label>
             <label for="im2">
-                <input required type="file" class="upload-button-styled" name="fotos[]" id="im2" accept="image/*" required>
+                <input type="file" class="upload-button-styled" name="fotos[]" id="im2" accept="image/*">
                 <img src="<?php echo((sizeof($photos) >= 2) ? '../app/user_pictures/'.$photos[1]['photo_route']: 'media/NewImg.svg')?>"  alt="foto" id="img2" class="img-general">
             </label>
             <label for="im3">
@@ -98,6 +100,7 @@
     </div>
 
     <button type="submit" class="gradiente-verde" name="guardar_fotos" style="margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Guardar Cambios</button>
+    <button type="submit" name="cerrar_sesion" formnovalidate style="background: var(--gradiente-rojo); margin-top: 2rem; margin-bottom: 3rem; margin-left: 2rem;">Cerrar Sesión</button>
 
 </form>
 
