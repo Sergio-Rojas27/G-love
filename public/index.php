@@ -417,6 +417,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $url_destino = '?feed';
         $_SESSION['i'] += 1;
     }
+    if (isset($_POST['like_persona']))
+    {
+        $url_destino = '?feed';
+        $_SESSION['i'] += 1;
+
+        // registrar el like en la base de datos
+        $stmt = $mysqli->prepare('INSERT INTO users_likes (id_user_from, id_user_to, visible, dia) VALUES (?, ?, 1, CURRENT_DATE());'); 
+        $stmt->bind_param('ii', $_SESSION['usuario_id'], $_POST['like_persona']);
+        $stmt->execute();
+    }
+    if (isset($_POST['rechazo_persona']))
+    {
+        $url_destino = '?feed';
+        $_SESSION['i'] += 1;
+    }
 
     header("Location: " . $url_destino , true, 303); // redirect por get
     exit;

@@ -107,7 +107,7 @@
                 <img src="media/siguiente.svg" alt="">
             </button>
 
-            <button class="btn-feed-like" type="submit" name="like_persona">
+            <button class="btn-feed-like" type="submit" value="<?php echo $persona_actual['id_user']; ?>" name="like_persona">
                 <img src="media/like.svg" alt="">
             </button>
         </div>

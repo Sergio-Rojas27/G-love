@@ -48,7 +48,7 @@
 /* --- El Mensaje --- */
 .message {
     font-size: 1rem;
-    font-weight: 100; /* Normal */
+    font-weight: 50; /* Normal */
     margin: 0;
     line-height: 1.2;
 }
