@@ -34,9 +34,17 @@
         ?>
 
     <!-- Esto es retroactivo y funciona con la cuestion, ya tu ves (Moguel, como hacemos pa que redireccione) -->
+     <a href="index.php?feed" class="icono-navbar">
         <img src="<?php echo htmlspecialchars($ruta_imagen1)?>" alt="" class="icono-navbar" id="1">
+     </a>
+     <a href="index.php?chats" class="icono-navbar">
         <img src="<?php echo htmlspecialchars($ruta_imagen2)?>" alt="" class="icono-navbar" id="2">
+     </a>
+     <a href="index.php?interacciones" class="icono-navbar">
         <img src="<?php echo htmlspecialchars($ruta_imagen3)?>" alt="" class="icono-navbar" id="3">
+     </a>
+     <a href="index.php?perfil" class="icono-navbar">
         <img src="<?php echo htmlspecialchars($ruta_imagen4)?>" alt="" class="icono-navbar" id="4">
+     </a>
     </div>
 </div>
