@@ -22,9 +22,27 @@
             <p class="texto-general">Información</p>
         </div>
         <div class="btns-perfil">
-            <p class="texto-general">Metas</p>
+            <p class="texto-general">Estadísticas</p>
         </div>
     </div>
+
+    <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Estadísticas</p>
+
+    <div class="container-form">
+            <div class="container-scroll-y-metas">
+            <?php 
+                $stmt = $mysqli->prepare('SELECT id_game, game_name FROM games;');
+                $stmt->execute();
+                $resultados = $stmt->get_result();
+            ?>
+            <?php while($fila = $resultados->fetch_assoc()): ?>
+                <div class="container-item-scroll">
+                    <p class="texto-general" style="text-align: left;"><?php echo $fila['game_name']; ?></p>
+                </div>
+            <?php endwhile ?>
+        </div>
+    </div>
+
 
 
 </form>
