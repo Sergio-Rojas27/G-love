@@ -90,7 +90,9 @@
                     </div>
                 <?php endforeach; ?>
                     <div class="tags" style="background: var(--gradiente-morado);">
-                        <p class="texto-general">Ver más ...</p>
+                        <a href="index.php?perfil&verPerfil=<?php echo $persona_actual['id_user']; ?>">
+                            <p class="texto-general">Ver más ...</p>
+                        </a>
                     </div>
                 </div>
             </div>
