@@ -132,6 +132,11 @@
     border-radius: 14px;
 }
 
+.back-btn:hover {
+  background: var(--gradiente-morado-contraste);
+  box-shadow: 0 0 15px 2px #5D00E8;
+}
+
 .sendMessage-container {
     position: fixed; /* Esto lo hace "sticky" */
     bottom: 5rem;
@@ -187,6 +192,11 @@
     cursor: pointer;
     transition: transform 0.2s;
     flex-shrink: 0; /* Evita que el botón se aplaste */
+}
+
+.send-button:hover {
+    background: var(--gradiente-verde-contraste);
+    box-shadow: 0 0 15px 2px #00B17E;
 }
 
 .match-card {
@@ -248,7 +258,12 @@
     .gheart {
     color: #00B17E; /* Color rosado para los corazones */
     font-size: 1.2rem;
-  }
+  }  
+
+  .gheart:hover {
+    background: var(--gradiente-verde-contraste);
+    box-shadow: 0 0 15px 2px #00B17E;
+}
 
   /* --- BOTONES DE ACCIÓN --- */
   .actions {
@@ -274,6 +289,11 @@
     align-items: center;
   }
 
+  .btn-chat:hover {
+    background: var(--gradiente-verde-contraste);
+    box-shadow: 0 0 15px 2px #00B17E;
+}
+
   /* Botón Eliminar */
   .btn-delete {
     background: linear-gradient(0deg, #8E0036 0%, #FF0066 100%);
@@ -290,6 +310,12 @@
     transition: transform 0.1s;
     padding: 0;
   }
+  
+  .btn-delete:hover {
+    background: var(--gradiente-rojo-contraste);
+    box-shadow: 0 0 15px 2px #FF0066;
+  }
+
   .trash-icon {
   width: 50%; /* Ocupa la mitad del botón, ajusta este % a tu gusto */
   aspect-ratio: 1/1;

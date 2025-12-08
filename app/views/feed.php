@@ -1,7 +1,8 @@
 <?php 
     $titulo_header = 'Game Lovers';
     require_once __DIR__ . '../../templates/header.php';
-
+    require_once __DIR__ . '../../controllers/interacciones.php';
+    $interacciones_controller = new InteraccionesController();
     $stmt = $mysqli->prepare('CALL posibles_matches(?)');
     $stmt->bind_param('i', $_SESSION['usuario_id']);
     $stmt->execute();
@@ -40,7 +41,7 @@
 <form action="" method="POST" class="form-todo">
 
     <div class="container-center">
-        <div class="container-profile" style="background-image: url('media/test.jpg');">
+        <div class="container-profile" style="background-image: url('<?php echo(($interacciones_controller->getProfilePic($persona_actual['id_user']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($persona_actual['id_user']): '../app/user_pictures/default.png')?>');">
             <div class="container-center"  style="margin-top: 0;">
                 <div class="container-indicate-img">
                     <?php foreach($fotos as $foto): ?>

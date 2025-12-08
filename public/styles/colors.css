@@ -5,13 +5,27 @@
     --gradiente-azul: linear-gradient(to bottom, #2E2BE2, #1C1B7F);
     --gradiente-blanco: linear-gradient(to bottom, #FFFFFF, #A1A1A1);
     --gradiente-gris: linear-gradient(180deg, #5C467E 100%, #36294A 100%);
+
+    --gradiente-morado-contraste: linear-gradient(to bottom, #7800E8, #37006B);
+    --gradiente-verde-contraste: linear-gradient(to bottom, #00D15E, #007836);
+    --gradiente-rojo-contraste: linear-gradient(to bottom, #FF0090, #7F0048);
 }
 .gradiente-morado {
     background: var(--gradiente-morado);
 }
 
+.gradiente-morado:hover {
+    background: var(--gradiente-morado-contraste);
+    box-shadow: 0 0 15px 2px #5D00E8;
+}
+
 .gradiente-verde {
     background: var(--gradiente-verde);
+}
+
+.gradiente-verde:hover {
+    background: var(--gradiente-verde-contraste);
+    box-shadow: 0 0 15px 2px #00B17E;
 }
 
 .gradiente-azul{
@@ -20,4 +34,8 @@
 
 .gradiente-blanco{
     background: var(--gradiente-blanco);
+}
+.btn-feed-x:hover {
+    background: var(--gradiente-rojo-contraste);
+    box-shadow: 0 0 15px 2px #FF0066;
 }

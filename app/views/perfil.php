@@ -22,26 +22,28 @@
 ?>
 <form action="" method="POST" class="form-todo">
     <div class="container-left">
-        <img src="../app/user_pictures/<?php echo $profile_photo?>" alt=""  class="img-perfil-p">
+        <img src="<?php echo(($interacciones_controller->getProfilePic($_SESSION['usuario_id']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($_SESSION['usuario_id']): '../app/user_pictures/default.png')?>" alt=""  class="img-perfil-p">
         <div id="container-names">
             <p class="Subtitulos" id="NombrePerfil"><?php echo htmlspecialchars($user['first_name']);?></p>
             <p class="Subtitulos-gris"><?php echo htmlspecialchars($user['username']);?></p>
         </div>
+        <!--
         <div class="compartir">
             <img src="media/share.svg" alt="">
         </div>
+        -->
     </div>
 
     <div class="container-center">
-        <div class="btns-perfil">
+        <a href="index.php?perfil" class="btns-perfil">
             <p class="texto-general">Fotos</p>
-        </div>
-        <div class="btns-perfil">
+        </a>
+        <a href="index.php?perfil2" class="btns-perfil">
             <p class="texto-general">Información</p>
-        </div>
-        <div class="btns-perfil">
-            <p class="texto-general">Metas</p>
-        </div>
+        </a>
+        <a href="index.php?perfil3" class="btns-perfil">
+            <p class="texto-general">Estadísticas</p>
+        </a>
     </div>
 
     <p class="Subtitulos" style="text-align: center; margin-top: 1.5rem;">Fotos</p>
@@ -50,7 +52,7 @@
                 <div class="container-img">
             <label for="im1">
                 <input required type="file" class="upload-button-styled" name="fotos[]" id="im1" accept="image/*" required>
-                <img src="<?php echo(($photos[0]['photo_route'] <> null) ? '../app/user_pictures/'.$photos[0]['photo_route']: 'media/NewImg.svg')?>"  alt="foto" id="img1" class="img-general">
+                <img src="<?php echo((sizeof($photos) >= 1) ? '../app/user_pictures/'.$photos[0]['photo_route']: 'media/NewImg.svg')?>"  alt="foto" id="img1" class="img-general">
             </label>
             <label for="im2">
                 <input required type="file" class="upload-button-styled" name="fotos[]" id="im2" accept="image/*" required>

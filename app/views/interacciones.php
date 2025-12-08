@@ -14,7 +14,7 @@
             // MATCH VISIBLE
     ?>
     <div class="match-card">
-    <img src="https://i.pinimg.com/736x/87/14/55/8714556a52021ba3a55c8e7a8338e552.jpg" alt="Perfil" class="profile-pic">
+    <img src=" <?php echo(($interacciones_controller->getProfilePic($interaccion['id_user_from']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($interaccion['id_user_from']): '../app/user_pictures/default.png')?> " alt="Perfil" class="profile-pic">
     
     <div class="right-content">
         <div class="info-bubble">
@@ -38,7 +38,7 @@
             // LIKE VISIBLE            
     ?>
             <div class="match-card">
-            <img src="https://i.pinimg.com/736x/87/14/55/8714556a52021ba3a55c8e7a8338e552.jpg" alt="Perfil" class="profile-pic">
+            <img src=" <?php echo(($interacciones_controller->getProfilePic($interaccion['id_user_from']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($interaccion['id_user_from']): '../app/user_pictures/default.png')?> " alt="Perfil" class="profile-pic">
             
             <div class="right-content">
                 <div class="info-bubble">
@@ -64,7 +64,7 @@
             // MATCH NO VISIBLE
     ?>
         <div class="match-card">
-            <img src="https://i.pinimg.com/736x/87/14/55/8714556a52021ba3a55c8e7a8338e552.jpg" alt="Perfil" class="profile-pic" style="filter: blur(4px); transition: filter 0.3s ease; ">
+            <img src=" <?php echo(($interacciones_controller->getProfilePic($interaccion['id_user_from']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($interaccion['id_user_from']): '../app/user_pictures/default.png')?> " alt="Perfil" class="profile-pic" style="filter: blur(4px); transition: filter 0.3s ease; ">
             <div class="right-content">
                 <div class="info-bubble">
                     <div class="username">???</div>
@@ -88,7 +88,7 @@
             // LIKE NO VISIBLE
     ?>
         <div class="match-card">
-            <img src="https://i.pinimg.com/736x/87/14/55/8714556a52021ba3a55c8e7a8338e552.jpg" alt="Perfil" class="profile-pic" style="filter: blur(4px); transition: filter 0.3s ease; ">
+            <img src=" <?php echo(($interacciones_controller->getProfilePic($interaccion['id_user_from']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($interaccion['id_user_from']): '../app/user_pictures/default.png')?> " alt="Perfil" class="profile-pic" style="filter: blur(4px); transition: filter 0.3s ease; ">
             
             <div class="right-content">
                 <div class="info-bubble">

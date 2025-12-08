@@ -5,6 +5,8 @@
     require_once __DIR__ . '../../controllers/messages.php';
     $chat_controller = new MessagesController();
     $chats = $chat_controller->getChats($usuario_actual);
+    require_once __DIR__ . '../../controllers/interacciones.php';
+    $interacciones_controller = new InteraccionesController();
     // INCLUIR EL HEADER
     $titulo_header = 'Chats';
     require_once __DIR__ . '../../templates/header.php';
@@ -31,7 +33,7 @@
         <!-- Un Chat -->
          <a href="index.php?messaging&id_chat=<?php echo $chat['contacto_id']; ?>" style="margin: 0; padding: 0; width: 100%; ">
         <div class="notification-card" style="margin-left: 5%; margin-bottom: 5%;">
-            <img src="https://i.pinimg.com/736x/89/66/af/8966af4dfa228308488001646271a742.jpg" alt="Foto de perfil" class="avatar">
+            <img src="<?php echo(($interacciones_controller->getProfilePic($chat['contacto_id']) <> null) ? '../app/user_pictures/'.$interacciones_controller->getProfilePic($chat['contacto_id']): '../app/user_pictures/default.png')?>" alt="Foto de perfil" class="avatar">
             <div class="content">
                 <div class="username Subtitulos"><?php echo htmlspecialchars($chat['usernameChat'])  ?></div>
                 <p class="message texto-general"><?php echo htmlspecialchars($chat['ultimo_mensaje']) ?></p>
